@@ -72,6 +72,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }else{    
             paginaanterior.disabled = false;
         }
+
+    if((NuevoId-1) - ((pagina+1)*5)){
+        paginasiguiente.disabled = true;
+    }else{
+    paginasiguiente.disabled = true;
+    }
+
     labelpage.textContent = "-  " + (pagina+1) + "  -"; //cargar página
 }, false);
 
@@ -107,33 +114,28 @@ firebaseChanguinref.on('value', (snapshot) => {
 
     var normalcounter = 1;
     for (var i = 1; i < 6; i++) {
+        if((estudiantes.length-1) >= (i+fivepage)){
         for (var k = 0; k < 7; k++) {
+            
              window['columna'+(k+1)+'f'+normalcounter].textContent = estudiantes[i+fivepage][k];
         }
-    if(window['columna1f'+normalcounter].textContent != ""){
+        if(window['columna1f'+normalcounter].textContent != ""){
         window['columna7f'+normalcounter].textContent = (i+fivepage);
-    }else{
-    }
+        }else{
+        }
+        }else{
+        }
         //para ir sumando las filas...
         normalcounter++;
     }
 
-
-    //var normalcounter = 1;
-    //for (var i = 1; i < 6; i++) {
-    //window['columna1f'+normalcounter].textContent = snapshot.child(i+fivepage).child("nombre").val();
-    //window['columna2f'+normalcounter].textContent = snapshot.child(i+fivepage).child("apellido").val();
-    //window['columna3f'+normalcounter].textContent = snapshot.child(i+fivepage).child("nombre-tutor").val();
-    //window['columna4f'+normalcounter].textContent = snapshot.child(i+fivepage).child("telefono").val();
-    //window['columna5f'+normalcounter].textContent = snapshot.child(i+fivepage).child("direccion").val();
-    //window['columna6f'+normalcounter].textContent = snapshot.child(i+fivepage).child("grado").val();
-    //if(window['columna1f'+normalcounter].textContent != ""){
-    //    window['columna7f'+normalcounter].textContent = (i+fivepage);
-    //}else{
-    //}
-    //    //para ir sumando las filas...
-    //    normalcounter++;
-    //}
+    //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
+    if(((NuevoId-1) - ((pagina+1)*5)) > 0){
+    paginasiguiente.disabled = false;
+    }else{
+    paginasiguiente.disabled = true;
+    }
+    console.log((NuevoId-1)+" "+(pagina+1*5));
 
     });
 
@@ -191,17 +193,28 @@ paginaanterior.addEventListener("click", function () {
 
     var normalcounter = 1;
     for (var i = 1; i < 6; i++) {
+        if((estudiantes.length-1) >= (i+fivepage)){
         for (var k = 0; k < 7; k++) {
+            
              window['columna'+(k+1)+'f'+normalcounter].textContent = estudiantes[i+fivepage][k];
         }
-    if(window['columna1f'+normalcounter].textContent != ""){
+        if(window['columna1f'+normalcounter].textContent != ""){
         window['columna7f'+normalcounter].textContent = (i+fivepage);
-    }else{
-    }
+        }else{
+        }
+        }else{
+        }
         //para ir sumando las filas...
         normalcounter++;
     }
 
+    //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
+    if(((NuevoId-1) - ((pagina+1)*5)) > 0){
+    paginasiguiente.disabled = false;
+    }else{
+    paginasiguiente.disabled = true;
+    }
+    console.log((NuevoId-1)+" "+(pagina+1*5));
 })
 
 
@@ -229,16 +242,28 @@ paginasiguiente.addEventListener("click", function () {
 
     var normalcounter = 1;
     for (var i = 1; i < 6; i++) {
+        if((estudiantes.length-1) >= (i+fivepage)){
         for (var k = 0; k < 7; k++) {
+            
              window['columna'+(k+1)+'f'+normalcounter].textContent = estudiantes[i+fivepage][k];
         }
-    if(window['columna1f'+normalcounter].textContent != ""){
+        if(window['columna1f'+normalcounter].textContent != ""){
         window['columna7f'+normalcounter].textContent = (i+fivepage);
-    }else{
-    }
+        }else{
+        }
+        }else{
+        }
         //para ir sumando las filas...
         normalcounter++;
     }
+    
+    //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
+    if(((NuevoId-1) - ((pagina+1)*5)) > 0){
+    paginasiguiente.disabled = false;
+    }else{
+    paginasiguiente.disabled = true;
+    }
+    console.log((NuevoId-1)+" "+(pagina+1*5));
 
 })
 
@@ -258,15 +283,27 @@ rellenar.addEventListener("click", function () {
 
     var normalcounter = 1;
     for (var i = 1; i < 6; i++) {
+        if((estudiantes.length-1) >= (i+fivepage)){
         for (var k = 0; k < 7; k++) {
+            
              window['columna'+(k+1)+'f'+normalcounter].textContent = estudiantes[i+fivepage][k];
         }
-    if(window['columna1f'+normalcounter].textContent != ""){
+        if(window['columna1f'+normalcounter].textContent != ""){
         window['columna7f'+normalcounter].textContent = (i+fivepage);
-    }else{
-    }
+        }else{
+        }
+        }else{
+        }
         //para ir sumando las filas...
         normalcounter++;
     }
+
+    //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
+    if(((NuevoId-1) - ((pagina+1)*5)) > 0){
+    paginasiguiente.disabled = false;
+    }else{
+    paginasiguiente.disabled = true;
+    }
+    console.log((NuevoId-1)+" "+(pagina+1*5));
     
 })
