@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>Untitled Document</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+</head>
+
+<body>
+<p>
+  <label for="textfield5">COD MAESTRO:</label>
+  <input type="text" name="textfield5" id="textfield5">
+  <label for="textfield6">NOMBRE:</label>
+  <input type="text" name="textfield5" id="textfield6">
+  <label for="textfield7">APELLIDO:</label>
+  <input type="text" name="textfield5" id="textfield7">
+</p>
+<p>
+  <label for="tel"><br>
+  Tel:</label>
+  <input type="tel" name="tel" id="tel">
+  <label for="textfield8">Direccion:</label>
+  <input type="text" name="textfield8" id="textfield8">
+  <input type="button" name="button" id="button" value="AGREGAR">
+</p>
+<p></p>
+<p>&nbsp; </p>
+<form id="form1" name="form1" method="post">
+MATERIA
+</form>
+<p>
+  <label for="textfield">COD MATERIA:</label>
+  <input type="text" name="textfield" id="textfield">
+  <label for="textfield2">MATERIA:</label>
+  <input type="text" name="textfield2" id="textfield2">
+  <label for="textfield3">COD MAESTRO:</label>
+  <input type="text" name="textfield3" id="textfield3">
+  <input type="button" name="button2" id="button2" value="AGREGAR">
+</p>
+<p>
+  <label for="search">Search:</label>
+  <input type="search" name="search" id="search">
+</p>
+<table width="75%" border="3" cellspacing="0" cellpadding="0">
+  <!-- TemplateBeginRepeat name="RepeatRegion1" -->
+    <tr>
+      <td>COD MATERIA</td>
+      <td><!-- TemplateBeginEditable name="EditRegion4" -->&nbsp;MATERIA<!-- TemplateEndEditable --></td>
+      <td><!-- TemplateBeginEditable name="EditRegion5" -->&nbsp;COD MAESTRO<!-- TemplateEndEditable --></td>
+    </tr>
+  <!-- TemplateEndRepeat -->
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>
