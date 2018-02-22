@@ -17,6 +17,8 @@ const columna4f1 = document.querySelector("#columna4f1");
 const columna5f1 = document.querySelector("#columna5f1");
 const columna6f1 = document.querySelector("#columna6f1");
 const columna7f1 = document.querySelector("#columna7f1");
+const columna8f1 = document.querySelector("#columna8f1");
+const columna9f1 = document.querySelector("#columna9f1");
 
 //Fila2
 const columna1f2 = document.querySelector("#columna1f2");
@@ -26,6 +28,8 @@ const columna4f2 = document.querySelector("#columna4f2");
 const columna5f2 = document.querySelector("#columna5f2");
 const columna6f2 = document.querySelector("#columna6f2");
 const columna7f2 = document.querySelector("#columna7f2");
+const columna8f2 = document.querySelector("#columna8f2");
+const columna9f2 = document.querySelector("#columna9f2");
 
 //Fila3
 const columna1f3 = document.querySelector("#columna1f3");
@@ -35,6 +39,8 @@ const columna4f3 = document.querySelector("#columna4f3");
 const columna5f3 = document.querySelector("#columna5f3");
 const columna6f3 = document.querySelector("#columna6f3");
 const columna7f3 = document.querySelector("#columna7f3");
+const columna8f3 = document.querySelector("#columna8f3");
+const columna9f3 = document.querySelector("#columna9f3");
 
 //Fila4
 const columna1f4 = document.querySelector("#columna1f4");
@@ -44,6 +50,8 @@ const columna4f4 = document.querySelector("#columna4f4");
 const columna5f4 = document.querySelector("#columna5f4");
 const columna6f4 = document.querySelector("#columna6f4");
 const columna7f4 = document.querySelector("#columna7f4");
+const columna8f4 = document.querySelector("#columna8f4");
+const columna9f4 = document.querySelector("#columna9f4");
 
 //Fila5
 const columna1f5 = document.querySelector("#columna1f5");
@@ -53,6 +61,8 @@ const columna4f5 = document.querySelector("#columna4f5");
 const columna5f5 = document.querySelector("#columna5f5");
 const columna6f5 = document.querySelector("#columna6f5");
 const columna7f5 = document.querySelector("#columna7f5");
+const columna8f5 = document.querySelector("#columna8f5");
+const columna9f5 = document.querySelector("#columna9f5");
 
 var pagina = 0; //Página por defecto...
 var NuevoId = 1;
@@ -117,18 +127,19 @@ firebaseChanguinref.on('value', (snapshot) => {
     estudiantes = new Array(snapshot.numChildren());
 
     for (var i = 1; i < NuevoId; i++) {
-        estudiantes[i] = new Array(6);          
+        estudiantes[i] = new Array(7);          
         estudiantes[i][0] = snapshot.child(i).child("nombre").val();
         estudiantes[i][1] = snapshot.child(i).child("apellido").val();
         estudiantes[i][2] = snapshot.child(i).child("nombre-tutor").val();
         estudiantes[i][3] = snapshot.child(i).child("telefono").val();
         estudiantes[i][4] = snapshot.child(i).child("direccion").val();
         estudiantes[i][5] = snapshot.child(i).child("grado").val();
+        estudiantes[i][6] = snapshot.child(i).child("fecha_nac").val();
     }
 
     //Vaciar Columnas
     for (var i = 1; i < 6; i++) {
-        for (var k = 1; k < 8; k++) {
+        for (var k = 1; k < 10; k++) {
             window['columna' + k + 'f'+ i].textContent = "";
         }
     }
