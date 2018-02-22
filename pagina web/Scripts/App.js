@@ -54,7 +54,7 @@ const columna5f5 = document.querySelector("#columna5f5");
 const columna6f5 = document.querySelector("#columna6f5");
 const columna7f5 = document.querySelector("#columna7f5");
 
-var pagina = 1;
+var pagina = 0; //Página por defecto...
 var NuevoId = 1;
 
 const botonagregar = document.querySelector("#botonagregar");
@@ -85,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }else{
     paginasiguiente.disabled = true;
     }
-    console.log((NuevoId-1)+" "+(pagina+1*5));
 
     labelpage.textContent = "-  " + (pagina+1) + "  -"; //cargar página
 
@@ -157,7 +156,6 @@ firebaseChanguinref.on('value', (snapshot) => {
     }else{
     paginasiguiente.disabled = true;
     }
-    console.log((NuevoId-1)+" "+(pagina+1*5));
 
     });
 
@@ -252,7 +250,6 @@ paginaanterior.addEventListener("click", function () {
     }else{
     paginasiguiente.disabled = true;
     }
-    console.log((NuevoId-1)+" "+(pagina+1*5));
 })
 
 
@@ -301,7 +298,6 @@ paginasiguiente.addEventListener("click", function () {
     }else{
     paginasiguiente.disabled = true;
     }
-    console.log((NuevoId-1)+" "+(pagina+1*5));
 
 })
 
@@ -342,7 +338,6 @@ rellenar.addEventListener("click", function () {
     }else{
     paginasiguiente.disabled = true;
     }
-    console.log((NuevoId-1)+" "+(pagina+1*5));
     
 })
 
