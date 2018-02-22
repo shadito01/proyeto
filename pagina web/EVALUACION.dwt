@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>Untitled Document</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+</head>
+
+<body>
+<p>
+  <label for="textfield">COD PARTICIPANTE:</label>
+  <input type="text" name="textfield" id="textfield">
+  <label for="textfield2">COD MATERIA:</label>
+  <input type="text" name="textfield2" id="textfield2">
+  <label for="textfield3">NOTA:</label>
+  <input type="text" name="textfield3" id="textfield3">
+</p>
+<p>
+  <label for="textfield4">NOTA FINAL:</label>
+  <input type="text" name="textfield4" id="textfield4">
+  <label for="textfield5">OBSERVACION:</label>
+  <input type="text" name="textfield5" id="textfield5">
+  <input type="button" name="button" id="button" value="AGREGAR">
+</p>
+<table width="75%" border="3" cellspacing="0" cellpadding="0">
+  <!-- TemplateBeginRepeat name="RepeatRegion1" -->
+    <tr>
+      <td><!-- TemplateBeginEditable name="EditRegion3" -->&nbsp;COD PARTICIPANTE<!-- TemplateEndEditable --></td>
+      <td><!-- TemplateBeginEditable name="EditRegion4" -->&nbsp;COD MATERIA<!-- TemplateEndEditable --></td>
+      <td><!-- TemplateBeginEditable name="EditRegion5" -->&nbsp;NOTA<!-- TemplateEndEditable --></td>
+      <td><!-- TemplateBeginEditable name="EditRegion6" -->&nbsp;NOTA FINAL<!-- TemplateEndEditable --></td>
+      <td><!-- TemplateBeginEditable name="EditRegion7" -->&nbsp;OBSERVACION<!-- TemplateEndEditable --></td>
+    </tr>
+  <!-- TemplateEndRepeat -->
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>
