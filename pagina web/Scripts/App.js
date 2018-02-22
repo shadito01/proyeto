@@ -62,6 +62,12 @@ const paginaanterior = document.querySelector("#paginaanterior");
 const paginasiguiente = document.querySelector("#siguientepagina");
 const labelpage = document.querySelector("#labelpage");
 const rellenar = document.querySelector("#rellenar");
+const nuevoestudiante = document.querySelector("#nuevoestudiante");
+const btnactualizar = document.querySelector("#btnactualizar");
+const idactualizar = document.querySelector("#idactualizar");
+
+//Saber si se está creando o actualizando
+var Actualizar = false;
 
 var firebaseChanguinref = firebase.database().ref().child("estudiantes");
 var estudiantes = new Array();
@@ -73,13 +79,32 @@ document.addEventListener('DOMContentLoaded', function() {
             paginaanterior.disabled = false;
         }
 
-    if((NuevoId-1) - ((pagina+1)*5)){
-        paginasiguiente.disabled = true;
+    //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
+    if(((NuevoId-1) - ((pagina+1)*5)) > 0){
+    paginasiguiente.disabled = false;
     }else{
     paginasiguiente.disabled = true;
     }
+    console.log((NuevoId-1)+" "+(pagina+1*5));
 
     labelpage.textContent = "-  " + (pagina+1) + "  -"; //cargar página
+
+        //Calcular edad
+    var test = "";
+    test = fechanac.value;
+    test = test.substring(0, 4);
+    var d = new Date();
+    var n = d.getFullYear();
+
+    var number1 = 1;
+    number1 = n;
+    var number2 = 2;
+    number2 = test;
+
+    var number3 = number1 - number2;
+
+    edad.textContent = number3;
+
 }, false);
 
 firebaseChanguinref.on('value', (snapshot) => {
@@ -101,7 +126,6 @@ firebaseChanguinref.on('value', (snapshot) => {
         estudiantes[i][4] = snapshot.child(i).child("direccion").val();
         estudiantes[i][5] = snapshot.child(i).child("grado").val();
     }
-    console.log(estudiantes[8][0]);
 
     //Vaciar Columnas
     for (var i = 1; i < 6; i++) {
@@ -109,8 +133,6 @@ firebaseChanguinref.on('value', (snapshot) => {
             window['columna' + k + 'f'+ i].textContent = "";
         }
     }
-
-    console.log("Succesfully Wiped...");
 
     var normalcounter = 1;
     for (var i = 1; i < 6; i++) {
@@ -141,7 +163,7 @@ firebaseChanguinref.on('value', (snapshot) => {
 
 botonagregar.addEventListener("click", function () {
     const textToSave = nombre.value+" "+apellido.value;
-    console.log("I am going to save " + textToSave + " to Firestore");
+    console.log("Guardando nuevo usuario...");
 
     const IDAdder = NuevoId;
 
@@ -168,6 +190,22 @@ botonagregar.addEventListener("click", function () {
     firebaseref.child("estudiantes").child(IDAdder).child("fecha_nac").set(fechanac.value);
 
     idestudiante.value = IDAdder;
+        //Calcular edad
+    var test = "";
+    test = fechanac.value;
+    test = test.substring(0, 4);
+    var d = new Date();
+    var n = d.getFullYear();
+
+    var number1 = 1;
+    number1 = n;
+    var number2 = 2;
+    number2 = test;
+
+    var number3 = number1 - number2;
+
+    edad.textContent = number3;
+
 })
 
 paginaanterior.addEventListener("click", function () {
@@ -306,4 +344,74 @@ rellenar.addEventListener("click", function () {
     }
     console.log((NuevoId-1)+" "+(pagina+1*5));
     
+})
+
+nuevoestudiante.addEventListener("click", function () {
+   
+   //Nuevo Estudiante
+    Actualizar = false;
+    
+    idestudiante.value = "Nuevo";
+    nombre.value = "";
+    apellido.value = "";
+    nombretutor.value = "";
+    telefono.value = "";
+    direccion.value = "";
+    date.value = "2000-01-01";
+    edad.value = "";
+    
+    //Calcular edad
+    var test = "";
+    test = fechanac.value;
+    test = test.substring(0, 4);
+    var d = new Date();
+    var n = d.getFullYear();
+
+    var number1 = 1;
+    number1 = n;
+    var number2 = 2;
+    number2 = test;
+
+    var number3 = number1 - number2;
+
+    edad.textContent = number3;
+
+    nombre.focus();
+    nombre.select();
+})
+
+function ActualizarEstudiante() {
+    
+    //Actualizar
+    //Revisar que halla escrito un ID
+    if(idactualizar.value == ""){
+        alert("Escriba un ID para actualizar");
+        idactualizar.focus();
+        return;
+    }else{
+    
+        //Revisar si el id existe
+        var existe = true;
+        try {
+            if((estudiantes.length-1) < idactualizar.value || idactualizar.value < 1){
+                alert("Este ID no existe");
+                idactualizar.focus();
+                return;
+            }else{
+                //continue...
+            }
+        } catch (e) {
+            alert("Escriba un ID válido para actualizar");
+            idactualizar.focus();
+            return;
+        }
+
+        alert("Se va a Actualizar el estudiante: #"+idactualizar.value);
+    }
+    
+}
+
+
+btnactualizar.addEventListener("click", function () {
+    ActualizarEstudiante();
 })
