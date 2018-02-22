@@ -64,6 +64,7 @@ const labelpage = document.querySelector("#labelpage");
 const rellenar = document.querySelector("#rellenar");
 
 var firebaseChanguinref = firebase.database().ref().child("estudiantes");
+var estudiantes = new Array();
 
 document.addEventListener('DOMContentLoaded', function() {
         if(pagina == 0){
@@ -76,25 +77,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
 firebaseChanguinref.on('value', (snapshot) => {
     
+    //Asignar en base a la página
+    var fivepage = pagina*5;
+    
+    //Conseguir último ID
+    NuevoId = snapshot.numChildren()+1;
+    console.log(NuevoId);
+    estudiantes = new Array(snapshot.numChildren());
+
+    for (var i = 1; i < NuevoId; i++) {
+        estudiantes[i] = new Array(6);          
+        estudiantes[i][0] = snapshot.child(i).child("nombre").val();
+        estudiantes[i][1] = snapshot.child(i).child("apellido").val();
+        estudiantes[i][2] = snapshot.child(i).child("nombre-tutor").val();
+        estudiantes[i][3] = snapshot.child(i).child("telefono").val();
+        estudiantes[i][4] = snapshot.child(i).child("direccion").val();
+        estudiantes[i][5] = snapshot.child(i).child("grado").val();
+    }
+    console.log(estudiantes[8][0]);
+
     //Vaciar Columnas
     for (var i = 1; i < 6; i++) {
         for (var k = 1; k < 8; k++) {
-            console.log('columna' + k + 'f'+ i);
             window['columna' + k + 'f'+ i].textContent = "";
         }
     }
 
     console.log("Succesfully Wiped...");
 
-    var fivepage = pagina*5;
     var normalcounter = 1;
     for (var i = 1; i < 6; i++) {
-    window['columna1f'+normalcounter].textContent = snapshot.child(i+fivepage).child("nombre").val();
-    window['columna2f'+normalcounter].textContent = snapshot.child(i+fivepage).child("apellido").val();
-    window['columna3f'+normalcounter].textContent = snapshot.child(i+fivepage).child("nombre-tutor").val();
-    window['columna4f'+normalcounter].textContent = snapshot.child(i+fivepage).child("telefono").val();
-    window['columna5f'+normalcounter].textContent = snapshot.child(i+fivepage).child("direccion").val();
-    window['columna6f'+normalcounter].textContent = snapshot.child(i+fivepage).child("grado").val();
+        for (var k = 0; k < 7; k++) {
+             window['columna'+(k+1)+'f'+normalcounter].textContent = estudiantes[i+fivepage][k];
+        }
     if(window['columna1f'+normalcounter].textContent != ""){
         window['columna7f'+normalcounter].textContent = (i+fivepage);
     }else{
@@ -104,8 +119,21 @@ firebaseChanguinref.on('value', (snapshot) => {
     }
 
 
-    NuevoId = snapshot.numChildren()+1;
-    console.log(NuevoId);
+    //var normalcounter = 1;
+    //for (var i = 1; i < 6; i++) {
+    //window['columna1f'+normalcounter].textContent = snapshot.child(i+fivepage).child("nombre").val();
+    //window['columna2f'+normalcounter].textContent = snapshot.child(i+fivepage).child("apellido").val();
+    //window['columna3f'+normalcounter].textContent = snapshot.child(i+fivepage).child("nombre-tutor").val();
+    //window['columna4f'+normalcounter].textContent = snapshot.child(i+fivepage).child("telefono").val();
+    //window['columna5f'+normalcounter].textContent = snapshot.child(i+fivepage).child("direccion").val();
+    //window['columna6f'+normalcounter].textContent = snapshot.child(i+fivepage).child("grado").val();
+    //if(window['columna1f'+normalcounter].textContent != ""){
+    //    window['columna7f'+normalcounter].textContent = (i+fivepage);
+    //}else{
+    //}
+    //    //para ir sumando las filas...
+    //    normalcounter++;
+    //}
 
     });
 
@@ -150,6 +178,30 @@ paginaanterior.addEventListener("click", function () {
     }
 
      labelpage.textContent = "-  " + (pagina+1) + "  -";
+
+    //Asignar en base a la página
+    var fivepage = pagina*5;
+
+    //Vaciar Columnas
+    for (var i = 1; i < 6; i++) {
+        for (var k = 1; k < 8; k++) {
+            window['columna' + k + 'f'+ i].textContent = "";
+        }
+    }
+
+    var normalcounter = 1;
+    for (var i = 1; i < 6; i++) {
+        for (var k = 0; k < 7; k++) {
+             window['columna'+(k+1)+'f'+normalcounter].textContent = estudiantes[i+fivepage][k];
+        }
+    if(window['columna1f'+normalcounter].textContent != ""){
+        window['columna7f'+normalcounter].textContent = (i+fivepage);
+    }else{
+    }
+        //para ir sumando las filas...
+        normalcounter++;
+    }
+
 })
 
 
@@ -164,12 +216,57 @@ paginasiguiente.addEventListener("click", function () {
     }
 
     labelpage.textContent = "-  " + (pagina+1) + "  -";
+
+        //Asignar en base a la página
+    var fivepage = pagina*5;
+
+    //Vaciar Columnas
+    for (var i = 1; i < 6; i++) {
+        for (var k = 1; k < 8; k++) {
+            window['columna' + k + 'f'+ i].textContent = "";
+        }
+    }
+
+    var normalcounter = 1;
+    for (var i = 1; i < 6; i++) {
+        for (var k = 0; k < 7; k++) {
+             window['columna'+(k+1)+'f'+normalcounter].textContent = estudiantes[i+fivepage][k];
+        }
+    if(window['columna1f'+normalcounter].textContent != ""){
+        window['columna7f'+normalcounter].textContent = (i+fivepage);
+    }else{
+    }
+        //para ir sumando las filas...
+        normalcounter++;
+    }
+
 })
 
 
 rellenar.addEventListener("click", function () {
    
     ////Rellenar Tabla
-   
+       //Asignar en base a la página
+    var fivepage = pagina*5;
+
+    //Vaciar Columnas
+    for (var i = 1; i < 6; i++) {
+        for (var k = 1; k < 8; k++) {
+            window['columna' + k + 'f'+ i].textContent = "";
+        }
+    }
+
+    var normalcounter = 1;
+    for (var i = 1; i < 6; i++) {
+        for (var k = 0; k < 7; k++) {
+             window['columna'+(k+1)+'f'+normalcounter].textContent = estudiantes[i+fivepage][k];
+        }
+    if(window['columna1f'+normalcounter].textContent != ""){
+        window['columna7f'+normalcounter].textContent = (i+fivepage);
+    }else{
+    }
+        //para ir sumando las filas...
+        normalcounter++;
+    }
     
 })
