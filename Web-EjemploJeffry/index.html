@@ -1,0 +1,44 @@
+<html>
+
+<head>
+
+    <title>Hot dogs == sandwiches?</title>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+
+    <script>
+
+        ////Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCrWILVVCoed38sYaKpYSj5cQ-oSZJUm3M",
+            authDomain: "webtestnewfrijey.firebaseapp.com",
+            databaseURL: "https://webtestnewfrijey.firebaseio.com/",
+            projectId: "webtestnewfrijey",
+            storageBucket: "",
+            messagingSenderId: "673934098441"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    
+
+</head>
+
+<body>
+
+    <hl id="hotDogOutput">Enviar Datos:</hl>
+    <input type="textfield" id="lastetHotDogStatus" />
+    <button id="saveButton">Enviar</button>
+
+    <br></br>
+    <hl id="labeltextfromout">Datos recibidos: </hl>
+    <hl id="txtfromout">Loading</hl>
+    <script src="app.js"></script>   
+
+</body>
+
+
+
+</html>
