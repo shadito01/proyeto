@@ -1,0 +1,118 @@
+			<!-- start -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css">
+.JUAN {
+}
+#button {
+}
+</style>
+<!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
+<link href="css/bootstrap-3.3.7.css" rel="stylesheet" type="text/css">
+<link href="category1.html.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+body,td,th {
+	font-family: Constantia, "Lucida Bright", "DejaVu Serif", Georgia, serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 18px;
+	color: #223BCF;
+}
+</style>
+<script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBIOSD25Xtf7nSAGcCYHjShbL3_GPsONtw",
+    authDomain: "probando-1d6c3.firebaseapp.com",
+    databaseURL: "https://probando-1d6c3.firebaseio.com",
+    projectId: "probando-1d6c3",
+    storageBucket: "",
+    messagingSenderId: "1075472587654"
+	  var db = firebase.dataset();
+	   db.ref("metadata").set({
+	  app: "probando",
+	  ver:"0.0.01"
+  };
+  firebase.initializeApp(config);
+</script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div id="output"> </div>
+<img src="images/logo-azul.png" width="292" height="110" alt=""/>
+
+
+<div id="captions">
+  <label for="textfield3"><strong>NOMBRE</strong>:</label>
+  <input name="textfield" type="text" id="NOMBRE">
+  <label for="textfield2"><strong>APELLIDO</strong> :</label>
+  <input type="text" name="textfield" id="textfield">
+  <strong>NOMBRE_TUTOR</strong>:
+<input type="text" name="textfield2" id="textfield2">
+					
+  <div id="nav"> <a href="https://probando-1d6c3.firebaseio.com/" target="_blank"></a>
+
+	
+	
+    
+    
+    <ul>
+	  <label for="tel2"><strong>Tel</strong>:</label>
+							  <input type="tel" name="tel" id="tel">
+                              <strong>DIRECCION:</strong>
+<input type="text" name="textfield3" id="textfield3">
+                              <label for="select2"><strong>GRADO</strong>:</label>
+                              <select name="select" autofocus="autofocus" id="select">
+                                <option>1-A</option>
+                                <option>1-B</option>
+                                <option>1-C</option>
+                                <option>2-A</option>
+                                <option>2-B</option>
+                              </select>
+	</ul>
+							<label for="textfield4"><strong> EDAD</strong>:</label>
+	<input type="text" name="textfield5" id="textfield5">
+<label for="date2"><strong>FECHA DE NACIMIENTO</strong>:</label>
+	<input type="date" name="date" id="date">
+<input name="button" type="button" id="savebutton" value="AGREGAR">
+  </div>
+<br class="clear"> 
+</div>
+<div>
+
+<br class="clear" />
+					
+					<script type="text/javascript">
+
+						$.gallerax({
+							outputSelector: 		'#output img',				// Output selector
+							thumbnailsSelector:		'.thumbnails li img',		// Thumbnails selector
+							captionSelector:		'#captions .line',			// Caption selector
+							captionLines:			2,							// Caption lines (3 lines)
+							fade: 					'fast',						// Transition speed (fast)
+							navNextSelector:		'#nav a.navNext',			// 'Next' selector
+							navPreviousSelector:	'#nav a.navPrevious',		// 'Previous' selector
+							navFirstSelector:		'#nav a.navFirst',			// 'First' selector
+							navLastSelector:		'#nav a.navLast',			// 'Last' selector
+							navStopAdvanceSelector:	'#nav a.navStopAdvance',	// 'Stop Advance' selector
+							navPlayAdvanceSelector:	'#nav a.navPlayAdvance',	// 'Play Advance' selector
+							advanceFade:			'slow',						// Advance transition speed (slow)
+							advanceDelay:			4000,						// Advance delay (4 seconds)
+							advanceResume:			12000,						// Advance resume (12 seconds)
+							thumbnailsFunction: 	function(s) {				// Thumbnails function
+							
+								return s.replace(/_thumb\.jpg$/, '.jpg');
+								
+							}
+						});
+
+					</script>
+
+			<!-- end -->
