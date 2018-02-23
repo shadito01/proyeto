@@ -66,6 +66,8 @@ const columna9f5 = document.querySelector("#columna9f5");
 
 var pagina = 0; //Página por defecto...
 var NuevoId = 1;
+var Indexing = false;
+var fivepage = 0;
 
 const botonagregar = document.querySelector("#botonagregar");
 const paginaanterior = document.querySelector("#paginaanterior");
@@ -76,6 +78,8 @@ const nuevoestudiante = document.querySelector("#nuevoestudiante");
 const btnactualizar = document.querySelector("#btnactualizar");
 const idactualizar = document.querySelector("#idactualizar");
 const updateparticipante = document.querySelector("#btnactualizarselec");
+const botoneliminar = document.querySelector("#botoneliminar");
+const ideliminar = document.querySelector("#ideliminar");
 
 //Saber si se está creando o actualizando
 var Actualizar = false;
@@ -92,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     botonagregar.disabled = false;
     updateparticipante.disabled = true;
+    botoneliminar.disabled = true;
 
     //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
     if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
@@ -122,9 +127,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 firebaseChanguinref.on('value', (snapshot) => {
 
-    //Asignar en base a la página
-    var fivepage = pagina * 5;
-
     //Conseguir último ID
     NuevoId = snapshot.numChildren() + 1;
     console.log(NuevoId);
@@ -141,84 +143,52 @@ firebaseChanguinref.on('value', (snapshot) => {
         estudiantes[i][6] = snapshot.child(i).child("fecha_nac").val();
     }
 
-    //Vaciar Columnas
-    for (var i = 1; i < 6; i++) {
-        for (var k = 1; k < 10; k++) {
-            window['columna' + k + 'f' + i].textContent = "";
-        }
-    }
-
-    var normalcounter = 1;
-    for (var i = 1; i < 6; i++) {
-        if ((estudiantes.length - 1) >= (i + fivepage)) {
-            for (var k = 0; k < 7; k++) {
-
-                window['columna' + (k + 1) + 'f' + normalcounter].textContent = estudiantes[i + fivepage][k];
-            }
-            if (window['columna1f' + normalcounter].textContent != "") {
-                window['columna7f' + normalcounter].textContent = (i + fivepage);
-            } else {
-            }
-        } else {
-        }
-        //para ir sumando las filas...
-        normalcounter++;
-    }
-
-    //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
-    if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
-        paginasiguiente.disabled = false;
-    } else {
-        paginasiguiente.disabled = true;
-    }
+    RellenarTabla();
 
 });
 
 botonagregar.addEventListener("click", function () {
-    const textToSave = nombre.value + " " + apellido.value;
-    console.log("Guardando nuevo usuario...");
 
-    const IDAdder = NuevoId;
+    var RevisarCampos = RevisarCamposRellenos();
 
-    //Código para agregar estudiante
-    var firebaseRef = firebase.database().ref();
-    firebaseRef.child("estudiantes").child(IDAdder).child("nombre").set(nombre.value);
+    if (RevisarCampos) {
 
-    var firebaseRef = firebase.database().ref();
-    firebaseRef.child("estudiantes").child(IDAdder).child("apellido").set(apellido.value);
+        const textToSave = nombre.value + " " + apellido.value;
+        console.log("Guardando nuevo usuario...");
 
-    var firebaseRef = firebase.database().ref();
-    firebaseRef.child("estudiantes").child(IDAdder).child("nombre-tutor").set(nombretutor.value);
+        const IDAdder = NuevoId;
 
-    var firebaseRef = firebase.database().ref();
-    firebaseRef.child("estudiantes").child(IDAdder).child("telefono").set(telefono.value);
+        //Código para agregar estudiante
+        var firebaseRef = firebase.database().ref();
+        firebaseRef.child("estudiantes").child(IDAdder).child("nombre").set(nombre.value);
 
-    var firebaseRef = firebase.database().ref();
-    firebaseRef.child("estudiantes").child(IDAdder).child("direccion").set(direccion.value);
+        var firebaseRef = firebase.database().ref();
+        firebaseRef.child("estudiantes").child(IDAdder).child("apellido").set(apellido.value);
 
-    var firebaseRef = firebase.database().ref();
-    firebaseRef.child("estudiantes").child(IDAdder).child("grado").set(grado.value);
+        var firebaseRef = firebase.database().ref();
+        firebaseRef.child("estudiantes").child(IDAdder).child("nombre-tutor").set(nombretutor.value);
 
-    var firebaseref = firebase.database().ref();
-    firebaseref.child("estudiantes").child(IDAdder).child("fecha_nac").set(fechanac.value);
+        var firebaseRef = firebase.database().ref();
+        firebaseRef.child("estudiantes").child(IDAdder).child("telefono").set(telefono.value);
 
-    idestudiante.value = IDAdder;
-    //Calcular edad
-    var test = "";
-    test = fechanac.value;
-    test = test.substring(0, 4);
-    var d = new Date();
-    var n = d.getFullYear();
+        var firebaseRef = firebase.database().ref();
+        firebaseRef.child("estudiantes").child(IDAdder).child("direccion").set(direccion.value);
 
-    var number1 = 1;
-    number1 = n;
-    var number2 = 2;
-    number2 = test;
+        var firebaseRef = firebase.database().ref();
+        firebaseRef.child("estudiantes").child(IDAdder).child("grado").set(grado.value);
 
-    var number3 = number1 - number2;
+        var firebaseref = firebase.database().ref();
+        firebaseref.child("estudiantes").child(IDAdder).child("fecha_nac").set(fechanac.value);
 
-    edad.textContent = number3;
-    NuevoEstudiante();
+        idestudiante.value = IDAdder;
+
+        //Calcular edad
+        edad.textContent = CalcularEdad(fechanac.value.substring(0, 4));
+
+        NuevoEstudiante();
+    } else {
+        alert("Rellene todos los campos antes de Guardar");
+    }
 })
 
 paginaanterior.addEventListener("click", function () {
@@ -232,32 +202,7 @@ paginaanterior.addEventListener("click", function () {
 
     labelpage.textContent = "-  " + (pagina + 1) + "  -";
 
-    //Asignar en base a la página
-    var fivepage = pagina * 5;
-
-    //Vaciar Columnas
-    for (var i = 1; i < 6; i++) {
-        for (var k = 1; k < 8; k++) {
-            window['columna' + k + 'f' + i].textContent = "";
-        }
-    }
-
-    var normalcounter = 1;
-    for (var i = 1; i < 6; i++) {
-        if ((estudiantes.length - 1) >= (i + fivepage)) {
-            for (var k = 0; k < 7; k++) {
-
-                window['columna' + (k + 1) + 'f' + normalcounter].textContent = estudiantes[i + fivepage][k];
-            }
-            if (window['columna1f' + normalcounter].textContent != "") {
-                window['columna7f' + normalcounter].textContent = (i + fivepage);
-            } else {
-            }
-        } else {
-        }
-        //para ir sumando las filas...
-        normalcounter++;
-    }
+    RellenarTabla();
 
     //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
     if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
@@ -280,32 +225,7 @@ paginasiguiente.addEventListener("click", function () {
 
     labelpage.textContent = "-  " + (pagina + 1) + "  -";
 
-    //Asignar en base a la página
-    var fivepage = pagina * 5;
-
-    //Vaciar Columnas
-    for (var i = 1; i < 6; i++) {
-        for (var k = 1; k < 8; k++) {
-            window['columna' + k + 'f' + i].textContent = "";
-        }
-    }
-
-    var normalcounter = 1;
-    for (var i = 1; i < 6; i++) {
-        if ((estudiantes.length - 1) >= (i + fivepage)) {
-            for (var k = 0; k < 7; k++) {
-
-                window['columna' + (k + 1) + 'f' + normalcounter].textContent = estudiantes[i + fivepage][k];
-            }
-            if (window['columna1f' + normalcounter].textContent != "") {
-                window['columna7f' + normalcounter].textContent = (i + fivepage);
-            } else {
-            }
-        } else {
-        }
-        //para ir sumando las filas...
-        normalcounter++;
-    }
+    RellenarTabla();
 
     //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
     if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
@@ -320,32 +240,7 @@ paginasiguiente.addEventListener("click", function () {
 rellenar.addEventListener("click", function () {
 
     ////Rellenar Tabla
-    //Asignar en base a la página
-    var fivepage = pagina * 5;
-
-    //Vaciar Columnas
-    for (var i = 1; i < 6; i++) {
-        for (var k = 1; k < 8; k++) {
-            window['columna' + k + 'f' + i].textContent = "";
-        }
-    }
-
-    var normalcounter = 1;
-    for (var i = 1; i < 6; i++) {
-        if ((estudiantes.length - 1) >= (i + fivepage)) {
-            for (var k = 0; k < 7; k++) {
-
-                window['columna' + (k + 1) + 'f' + normalcounter].textContent = estudiantes[i + fivepage][k];
-            }
-            if (window['columna1f' + normalcounter].textContent != "") {
-                window['columna7f' + normalcounter].textContent = (i + fivepage);
-            } else {
-            }
-        } else {
-        }
-        //para ir sumando las filas...
-        normalcounter++;
-    }
+    RellenarTabla();
 
     //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
     if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
@@ -357,34 +252,71 @@ rellenar.addEventListener("click", function () {
 })
 
 updateparticipante.addEventListener("click", function () {
-    const IDAdder = idestudiante.value;
 
-    //Código para agregar estudiante
+    var RevisarCampos = RevisarCamposRellenos();
+
+    if (RevisarCampos) {
+
+        const IDAdder = idestudiante.value;
+
+        //Código para agregar estudiante
+        var firebaseRef = firebase.database().ref();
+        firebaseRef.child("estudiantes").child(IDAdder).child("nombre").set(nombre.value);
+
+        var firebaseRef = firebase.database().ref();
+        firebaseRef.child("estudiantes").child(IDAdder).child("apellido").set(apellido.value);
+
+        var firebaseRef = firebase.database().ref();
+        firebaseRef.child("estudiantes").child(IDAdder).child("nombre-tutor").set(nombretutor.value);
+
+        var firebaseRef = firebase.database().ref();
+        firebaseRef.child("estudiantes").child(IDAdder).child("telefono").set(telefono.value);
+
+        var firebaseRef = firebase.database().ref();
+        firebaseRef.child("estudiantes").child(IDAdder).child("direccion").set(direccion.value);
+
+        var firebaseRef = firebase.database().ref();
+        firebaseRef.child("estudiantes").child(IDAdder).child("grado").set(grado.value);
+
+        var firebaseref = firebase.database().ref();
+        firebaseref.child("estudiantes").child(IDAdder).child("fecha_nac").set(fechanac.value);
+        NuevoEstudiante();
+    } else {
+        alert("Rellene todos los campos antes de Guardar");
+    }
+})
+
+botoneliminar.addEventListener("click", function () {
+    //Eliminar
+    //Revisar que halla escrito un ID
+    if (ideliminar.value == "") {
+        alert("Escriba un ID para ELIMINAR");
+        ideliminar.focus();
+        return;
+    } else {
+        //Revisar si el id existe
+        try {
+            if ((estudiantes.length - 1) < ideliminar.value || ideliminar.value < 1) {
+                alert("Este ID no existe");
+                ideliminar.focus();
+                return;
+            } else {
+                //continue...
+            }
+        } catch (e) {
+            alert("Escriba un ID válido para ELIMINAR");
+            ideliminar.focus();
+            return;
+        }
+    }
+
     var firebaseRef = firebase.database().ref();
-    firebaseRef.child("estudiantes").child(IDAdder).child("nombre").set(nombre.value);
+    firebaseRef.child("estudiantes").child(ideliminar.value).remove();
 
-    var firebaseRef = firebase.database().ref();
-    firebaseRef.child("estudiantes").child(IDAdder).child("apellido").set(apellido.value);
-
-    var firebaseRef = firebase.database().ref();
-    firebaseRef.child("estudiantes").child(IDAdder).child("nombre-tutor").set(nombretutor.value);
-
-    var firebaseRef = firebase.database().ref();
-    firebaseRef.child("estudiantes").child(IDAdder).child("telefono").set(telefono.value);
-
-    var firebaseRef = firebase.database().ref();
-    firebaseRef.child("estudiantes").child(IDAdder).child("direccion").set(direccion.value);
-
-    var firebaseRef = firebase.database().ref();
-    firebaseRef.child("estudiantes").child(IDAdder).child("grado").set(grado.value);
-
-    var firebaseref = firebase.database().ref();
-    firebaseref.child("estudiantes").child(IDAdder).child("fecha_nac").set(fechanac.value);
-    NuevoEstudiante();
 })
 
 nuevoestudiante.addEventListener("click", function () {
-    NuevoEstudiante();    
+    NuevoEstudiante();
 })
 
 function NuevoEstudiante() {
@@ -398,7 +330,7 @@ function NuevoEstudiante() {
     telefono.value = "";
     direccion.value = "";
     date.value = "2000-01-01";
-    edad.value = "";
+    edad.value = "X";
 
     //Calcular edad
     var test = "";
@@ -422,7 +354,6 @@ function NuevoEstudiante() {
     nombre.select();
 }
 
-
 function ActualizarEstudiante() {
 
     //Actualizar
@@ -432,40 +363,53 @@ function ActualizarEstudiante() {
         idactualizar.focus();
         return;
     } else {
-
-
-
-
-        Actualizar = true;
-        botonagregar.disabled = true;
-        updateparticipante.disabled = false;
-
-        idestudiante.value = idactualizar.value;
-
-        nombre.value = estudiantes[idactualizar.value][0];
-        apellido.value = estudiantes[idactualizar.value][1];;
-        nombretutor.value = estudiantes[idactualizar.value][2];;
-        telefono.value = estudiantes[idactualizar.value][3];;
-        direccion.value = estudiantes[idactualizar.value][4];;
-        grado.value = estudiantes[idactualizar.value][5];;
-        date.value = estudiantes[idactualizar.value][6];;
-
-        //Calcular edad
-        var test = "";
-        test = fechanac.value;
-        test = test.substring(0, 4);
-        var d = new Date();
-        var n = d.getFullYear();
-        var number1 = 1;
-        number1 = n;
-        var number2 = 2;
-        number2 = test;
-        var number3 = number1 - number2;
-
-        edad.value = number3;
-
-        nombre.focus();
+        //Revisar si el id existe
+        try {
+            if ((estudiantes.length - 1) < idactualizar.value || idactualizar.value < 1) {
+                alert("Este ID no existe");
+                idactualizar.focus();
+                return;
+            } else {
+                //continue...
+            }
+        } catch (e) {
+            alert("Escriba un ID válido para actualizar");
+            idactualizar.focus();
+            return;
+        }
     }
+
+
+    Actualizar = true;
+    botonagregar.disabled = true;
+    updateparticipante.disabled = false;
+
+    idestudiante.value = idactualizar.value;
+
+    nombre.value = estudiantes[idactualizar.value][0];
+    apellido.value = estudiantes[idactualizar.value][1];;
+    nombretutor.value = estudiantes[idactualizar.value][2];;
+    telefono.value = estudiantes[idactualizar.value][3];;
+    direccion.value = estudiantes[idactualizar.value][4];;
+    grado.value = estudiantes[idactualizar.value][5];;
+    date.value = estudiantes[idactualizar.value][6];;
+
+    //Calcular edad
+    var test = "";
+    test = fechanac.value;
+    test = test.substring(0, 4);
+    var d = new Date();
+    var n = d.getFullYear();
+    var number1 = 1;
+    number1 = n;
+    var number2 = 2;
+    number2 = test;
+    var number3 = number1 - number2;
+
+    edad.value = number3;
+
+    nombre.focus();
+
 
 }
 
@@ -473,3 +417,65 @@ function ActualizarEstudiante() {
 btnactualizar.addEventListener("click", function () {
     ActualizarEstudiante();
 })
+
+function RellenarTabla() {
+
+    //Asignar en base a la página
+    fivepage = pagina * 5;
+
+    //Vaciar Columnas
+    for (var i = 1; i < 6; i++) {
+        for (var k = 1; k < 10; k++) {
+            window['columna' + k + 'f' + i].textContent = "";
+        }
+    }
+
+    var normalcounter = 1;
+    for (var i = 1; i < 6; i++) {
+        if ((estudiantes.length - 1) >= (i + fivepage)) {
+            for (var k = 0; k < 7; k++) {
+
+                window['columna' + (k + 1) + 'f' + normalcounter].textContent = estudiantes[i + fivepage][k];
+            }
+            if (window['columna1f' + normalcounter].textContent != "") {
+                window['columna7f' + normalcounter].textContent = (i + fivepage);
+                window['columna8f' + normalcounter].textContent = estudiantes[i + fivepage][6];
+                window['columna9f' + normalcounter].textContent = CalcularEdad(estudiantes[i + fivepage][6].substring(0, 4))
+            } else {
+            }
+        } else {
+        }
+        //para ir sumando las filas...
+        normalcounter++;
+    }
+
+    //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
+    if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
+        paginasiguiente.disabled = false;
+    } else {
+        paginasiguiente.disabled = true;
+    }
+
+}
+
+function RevisarCamposRellenos() {
+    if (nombre.value != "" && apellido.value != "" && nombretutor.value != "" && direccion.value != "" &&
+        telefono.value != "" && edad.value != "") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function CalcularEdad(FechaNac) {
+    var edad = 1;
+    var d = new Date();
+    var n = d.getFullYear();
+    var number1 = 1;
+    number1 = n;
+    var number2 = 2;
+    number2 = FechaNac;
+    var edad = number1 - FechaNac;
+
+    return edad;
+}
