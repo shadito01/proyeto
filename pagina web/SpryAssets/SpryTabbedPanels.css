@@ -71,12 +71,12 @@
 	padding: 4px 10px;
 	margin: 0px 1px 0px 0px;
 	font: bold 0.7em sans-serif;
-	background-color: #DDD;
+	background-color: #3D50E3;
 	list-style: none;
-	border-left: solid 1px #CCC;
-	border-bottom: solid 1px #999;
-	border-top: solid 1px #999;
-	border-right: solid 1px #999;
+	border-left: 3px outset #CCC;
+	border-bottom: 3px outset #999;
+	border-top: 3px outset #999;
+	border-right: 3px outset #999;
 	-moz-user-select: none;
 	-khtml-user-select: none;
 	cursor: pointer;
@@ -217,4 +217,3 @@
 	width: 30em;
 	height: 20em;
 }
-

@@ -16,7 +16,7 @@
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
 
-    <script>
+<script>
         // Initialize Firebase
         var config = {
             apiKey: "AIzaSyCOxRKXX0g1E_1iryvDmiSwck6oIR26DXk",
@@ -55,6 +55,9 @@
         .Estilo1 {
             color: #000000
         }
+h1,h2,h3,h4,h5,h6 {
+	font-weight: 300;
+}
         -->
     </style>
 </head>
@@ -87,7 +90,43 @@
                 <li class="TabbedPanelsTab" tabindex="0">EVALUACION</li>
             </ul>
             <div class="TabbedPanelsContentGroup">
-                <div class="TabbedPanelsContent">Contenido 1</div>
+                <div class="TabbedPanelsContent">
+                  <div class="login-box">
+                    <div class="login-logo">
+                      <form action="" method="post" enctype="application/x-www-form-urlencoded" name="form3" target="new" class="active" id="form3" autocomplete="on">
+                      </form>
+                    </div>
+                    <!-- /.login-logo -->
+                    <div class="login-box-body">
+                      <p class="login-box-msg">Registro en el sistema</p>
+                      <form action="file:///C|/Users/JORDANY/Desktop/PAGINA WEB/views/register" method="post">
+                        <label>
+                          <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
+                          nombre</label>
+                        <input name="name" type="text" class="active" />
+                        <!-- Clip image with an oval -->
+                        <img src="Agregar-contactos-Yahoo-MSN-Messenger.png" alt="..." width="30" height="32" class="img-rounded" />
+                         <!-- Clip image with a circle --><!-- Clip image with a thumbnail -->
+                         <div class="form-group has-feedback">
+                <label>email</label>
+                          <input type="email" class="alert-dismissable" name="email" />
+                        <img src="Иконка_письма_(ei).svg.png" alt="..." width="30" height="30" class="active" />                        </div>
+                        <div class="form-group has-feedback">
+                          <label>password</label>
+                          <input type="password" class="active" name="password" />
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-4">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Registrar</button>
+                          </div>
+                          <!-- /.col -->
+                        </div>
+                      </form>
+                    </div>
+                    <!-- /.login-box-body -->
+                  </div>
+                  <p>&nbsp;</p>
+                </div>
                 <div class="TabbedPanelsContent">
                     <p>
                         <label for="textfield3"><strong>ID</strong>:</label>
@@ -128,14 +167,14 @@
                         <input type="text" name="edad" id="edad" value="15" readonly=readonly />
                         <label for="date2"><strong>FECHA DE NACIMIENTO</strong>:</label>
                         <input type="date" name="date" id="date" value="1995-08-07" /><button id="botonagregar" >AGREGAR</button>
-                        <label> </label><button id="btnactualizarselec" >ACTUALIZAR </button>
+                      <label> </label><button id="btnactualizarselec" >ACTUALIZAR </button>
 
                         <form id="form1" name="form1" method="post" action="">
                             <label for="button4"></label>
                         </form>
                         <p>&nbsp;</p>
                     </div>
-                    <div align="center">
+                    <div align="center" class="alert-dismissable">
                             <tr>
                                 <td width="99" bordercolor="#000000">
                                     <table width="1039" height="276" border="2" class="table">
