@@ -66,6 +66,7 @@ const columna9f5 = document.querySelector("#columna9f5");
 
 var pagina = 0; //Página por defecto...
 var NuevoId = 1;
+var Indexing = false;
 
 const botonagregar = document.querySelector("#botonagregar");
 const paginaanterior = document.querySelector("#paginaanterior");
@@ -123,6 +124,14 @@ document.addEventListener('DOMContentLoaded', function () {
 }, false);
 
 firebaseChanguinref.on('child_removed', (snapshot) => {
+
+    //Reindexar
+    Indexing = true;
+    for (var i = 0; i < (snapshot.numChildren() + 1); i++) {
+        var snapshot.child(i) 
+    }
+
+    Indexing = false;
     //Asignar en base a la página
     var fivepage = pagina * 5;
 
@@ -175,57 +184,57 @@ firebaseChanguinref.on('child_removed', (snapshot) => {
 })
 
 firebaseChanguinref.on('value', (snapshot) => {
+    if (!Indexing) {
+        //Asignar en base a la página
+        var fivepage = pagina * 5;
 
-    //Asignar en base a la página
-    var fivepage = pagina * 5;
+        //Conseguir último ID
+        NuevoId = snapshot.numChildren() + 1;
+        console.log(NuevoId);
+        estudiantes = new Array(snapshot.numChildren());
 
-    //Conseguir último ID
-    NuevoId = snapshot.numChildren() + 1;
-    console.log(NuevoId);
-    estudiantes = new Array(snapshot.numChildren());
-
-    for (var i = 1; i < NuevoId; i++) {
-        estudiantes[i] = new Array(7);
-        estudiantes[i][0] = snapshot.child(i).child("nombre").val();
-        estudiantes[i][1] = snapshot.child(i).child("apellido").val();
-        estudiantes[i][2] = snapshot.child(i).child("nombre-tutor").val();
-        estudiantes[i][3] = snapshot.child(i).child("telefono").val();
-        estudiantes[i][4] = snapshot.child(i).child("direccion").val();
-        estudiantes[i][5] = snapshot.child(i).child("grado").val();
-        estudiantes[i][6] = snapshot.child(i).child("fecha_nac").val();
-    }
-
-    //Vaciar Columnas
-    for (var i = 1; i < 6; i++) {
-        for (var k = 1; k < 10; k++) {
-            window['columna' + k + 'f' + i].textContent = "";
+        for (var i = 1; i < NuevoId; i++) {
+            estudiantes[i] = new Array(7);
+            estudiantes[i][0] = snapshot.child(i).child("nombre").val();
+            estudiantes[i][1] = snapshot.child(i).child("apellido").val();
+            estudiantes[i][2] = snapshot.child(i).child("nombre-tutor").val();
+            estudiantes[i][3] = snapshot.child(i).child("telefono").val();
+            estudiantes[i][4] = snapshot.child(i).child("direccion").val();
+            estudiantes[i][5] = snapshot.child(i).child("grado").val();
+            estudiantes[i][6] = snapshot.child(i).child("fecha_nac").val();
         }
-    }
 
-    var normalcounter = 1;
-    for (var i = 1; i < 6; i++) {
-        if ((estudiantes.length - 1) >= (i + fivepage)) {
-            for (var k = 0; k < 7; k++) {
-
-                window['columna' + (k + 1) + 'f' + normalcounter].textContent = estudiantes[i + fivepage][k];
+        //Vaciar Columnas
+        for (var i = 1; i < 6; i++) {
+            for (var k = 1; k < 10; k++) {
+                window['columna' + k + 'f' + i].textContent = "";
             }
-            if (window['columna1f' + normalcounter].textContent != "") {
-                window['columna7f' + normalcounter].textContent = (i + fivepage);
+        }
+
+        var normalcounter = 1;
+        for (var i = 1; i < 6; i++) {
+            if ((estudiantes.length - 1) >= (i + fivepage)) {
+                for (var k = 0; k < 7; k++) {
+
+                    window['columna' + (k + 1) + 'f' + normalcounter].textContent = estudiantes[i + fivepage][k];
+                }
+                if (window['columna1f' + normalcounter].textContent != "") {
+                    window['columna7f' + normalcounter].textContent = (i + fivepage);
+                } else {
+                }
             } else {
             }
-        } else {
+            //para ir sumando las filas...
+            normalcounter++;
         }
-        //para ir sumando las filas...
-        normalcounter++;
-    }
 
-    //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
-    if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
-        paginasiguiente.disabled = false;
-    } else {
-        paginasiguiente.disabled = true;
+        //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
+        if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
+            paginasiguiente.disabled = false;
+        } else {
+            paginasiguiente.disabled = true;
+        }
     }
-
 });
 
 botonagregar.addEventListener("click", function () {
@@ -497,7 +506,7 @@ function NuevoEstudiante() {
     telefono.value = "";
     direccion.value = "";
     date.value = "2000-01-01";
-    edad.value = "";
+    edad.value = "X";
 
     //Calcular edad
     var test = "";
@@ -521,6 +530,9 @@ function NuevoEstudiante() {
     nombre.select();
 }
 
+function ReIndexar() {
+
+}
 
 function ActualizarEstudiante() {
 
