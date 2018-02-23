@@ -49,7 +49,8 @@
     }
 
     .Estilo1 {
-      color: #000000
+	color: #000000;
+	text-transform: none;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -57,6 +58,7 @@
     }
     -->
   </style>
+  <link href="less/mixins/table-row.less.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -188,93 +190,111 @@
           </div>
           <div align="center" class="alert-dismissable">
             <tr>
-              <td width="99" bordercolor="#000000">
-                <table width="1039" height="276" border="2" class="table">
-                  <tr>
-                    <td width="28"><strong>ID</strong></td>
-                    <td width="87"><strong>NOMBRE</strong></td>
-                    <td width="95"><strong>APELLIDO</strong></td>
-                    <td width="116"><strong>NOMBRE TUTOR</strong></td>
-                    <td width="121"><strong>TELEFONO</strong></td>
-                    <td width="94"><strong>DIRECCION</strong></td>
-                    <td width="59"><strong>GRADO</strong></td>
-                    <td width="70"><strong>FECHA NACIMIENTO</strong> </td>
-                    <td width="64"><strong>EDAD</strong></td>
-                    <td width="15" rowspan="6">&nbsp;</td>
-                    <td width="97"><input type="submit" name="actualizar" id="btnactualizar" value="ACTUAZALIAR" /></td>
-                    <td width="63"><input type="text" style="width: 35px; text-align:center; font-weight: bold; background-color:lightblue;" id="idactualizar" /></td>
-                  </tr>
-                  <tr>
-                    <td id="columna7f1">&nbsp;</td>
-                    <td id="columna1f1">&nbsp;</td>
-                    <td id="columna2f1">&nbsp;</td>
-                    <td id="columna3f1">&nbsp;</td>
-                    <td id="columna4f1">&nbsp;</td>
-                    <td id="columna5f1">&nbsp;</td>
-                    <td id="columna6f1">&nbsp;</td>
-                    <td id="columna8f1">&nbsp;</td>
-                    <td id="columna9f1">&nbsp;</td>
-                    <td><input type="submit" name="button2" id="botoneliminar" value="ELIMINAR" /></td>
-                    <td width="63"><input type="text" style="width: 35px; text-align:center; font-weight: bold; background-color:lightcoral;" id="ideliminar" /></td>
-                  </tr>
-                  <tr>
-                    <td id="columna7f2">&nbsp;</td>
-                    <td id="columna1f2">&nbsp;</td>
-                    <td id="columna2f2">&nbsp;</td>
-                    <td id="columna3f2">&nbsp;</td>
-                    <td id="columna4f2">&nbsp;</td>
-                    <td id="columna5f2">&nbsp;</td>
-                    <td id="columna6f2">&nbsp;</td>
-                    <td id="columna8f2">&nbsp;</td>
-                    <td id="columna9f2">&nbsp;</td>
-                    <td><input type="submit" name="nuevoestudiante" id="nuevoestudiante" value="NUEVO" /></td>
-                  </tr>
-                  <tr>
-                    <td id="columna7f3">&nbsp;</td>
-                    <td id="columna1f3">&nbsp;</td>
-                    <td id="columna2f3">&nbsp;</td>
-                    <td id="columna3f3">&nbsp;</td>
-                    <td id="columna4f3">&nbsp;</td>
-                    <td id="columna5f3">&nbsp;</td>
-                    <td id="columna6f3">&nbsp;</td>
-                    <td id="columna8f3">&nbsp;</td>
-                    <td id="columna9f3">&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td id="columna7f4">&nbsp;</td>
-                    <td id="columna1f4">&nbsp;</td>
-                    <td id="columna2f4">&nbsp;</td>
-                    <td id="columna3f4">&nbsp;</td>
-                    <td id="columna4f4">&nbsp;</td>
-                    <td id="columna5f4">&nbsp;</td>
-                    <td id="columna6f4">&nbsp;</td>
-                    <td id="columna8f4">&nbsp;</td>
-                    <td id="columna9f4">&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td id="columna7f5">&nbsp;</td>
-                    <td id="columna1f5">&nbsp;</td>
-                    <td id="columna2f5">&nbsp;</td>
-                    <td id="columna3f5">&nbsp;</td>
-                    <td id="columna4f5">&nbsp;</td>
-                    <td id="columna5f5">&nbsp;</td>
-                    <td id="columna6f5">&nbsp;</td>
-                    <td id="columna8f5">&nbsp;</td>
-                    <td id="columna9f5">&nbsp;</td>
-                  </tr>
-                </table>
-              </td>
+              <td width="99" bordercolor="#000000"><table width="1039" height="256" border="0" class="table">
+                <tr>
+                  <td width="29" bgcolor="#FFFFFF" style="font-weight: normal"><strong>ID</strong></td>
+                  <td width="91" bgcolor="#FFFFFF" style="font-weight: normal"><strong>NOMBRE</strong></td>
+                  <td width="99" bgcolor="#FFFFFF" style="font-weight: normal"><strong>APELLIDO</strong></td>
+                  <td width="145" bgcolor="#FFFFFF" style="font-weight: normal"><strong>NOMBRE TUTOR</strong></td>
+                  <td width="102" bgcolor="#FFFFFF" style="font-weight: normal"><strong>TELEFONO</strong></td>
+                  <td width="98" bgcolor="#FFFFFF" style="font-weight: normal; text-decoration: none;"><s><strong>DIRECCION</strong></th></td>
+                  <td width="61" bgcolor="#FFFFFF" style="font-weight: normal"><strong>GRADO</strong></td>
+                  <td width="132" bgcolor="#FFFFFF" style="font-weight: normal"><strong>FEC NACIMIENTO</strong></td>
+                  <td width="45" bgcolor="#FFFFFF" style="font-weight: normal"><strong>EDAD</strong></td>
+                  <td width="15" rowspan="6">&nbsp;</td>
+                  <td width="101"><s>
+                    <input type="submit" name="actualizar" id="btnactualizar" value="ACTUAZALIAR" />
+                  </s></td>
+                  <td width="71"><s>
+                    <input type="text" style="width: 35px; text-align:center; font-weight: bold; background-color:lightblue;" id="idactualizar" />
+                  </s></td>
+                </tr>
+                <tr>
+                  <td height="27" bgcolor="#B1C5F3" id="columna7f1">&nbsp;</td>
+                  <td bgcolor="#B1C5F3" id="columna1f1">&nbsp;</td>
+                  <td bgcolor="#B1C5F3" id="columna2f1">&nbsp;</td>
+                  <td bgcolor="#B1C5F3" id="columna3f1">&nbsp;</td>
+                  <td bgcolor="#B1C5F3" id="columna4f1">&nbsp;</td>
+                  <td bgcolor="#B1C5F3" id="columna5f1">&nbsp;</td>
+                  <td bgcolor="#B1C5F3" id="columna6f1">&nbsp;</td>
+                  <td bgcolor="#B1C5F3" id="columna8f1">&nbsp;</td>
+                  <td bgcolor="#B1C5F3" id="columna9f1">&nbsp;</td>
+                  <td><s>
+                    <input type="submit" name="button2" id="botoneliminar" value="ELIMINAR" />
+                  </s></td>
+                  <td width="71"><s>
+                    <input type="text" style="width: 35px; text-align:center; font-weight: bold; background-color:lightcoral;" id="ideliminar" />
+                  </s></td>
+                </tr>
+                <tr>
+                  <td bgcolor="#FFFFFF" id="columna7f2">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna1f2">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna2f2">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna3f2">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna4f2">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna5f2">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna6f2">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna8f2">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna9f2">&nbsp;</td>
+                  <td><s>
+                    <input type="submit" name="nuevoestudiante" id="nuevoestudiante" value="NUEVO" />
+                  </s></td>
+                </tr>
+                <tr bgcolor="#B1C5F3">
+                  <td id="columna7f3">&nbsp;</td>
+                  <td id="columna1f3">&nbsp;</td>
+                  <td id="columna2f3">&nbsp;</td>
+                  <td id="columna3f3">&nbsp;</td>
+                  <td id="columna4f3">&nbsp;</td>
+                  <td id="columna5f3">&nbsp;</td>
+                  <td id="columna6f3">&nbsp;</td>
+                  <td id="columna8f3">&nbsp;</td>
+                  <td id="columna9f3">&nbsp;</td>
+                </tr>
+                <tr bgcolor="#B1C5F3">
+                  <td bgcolor="#FFFFFF" id="columna7f4">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna1f4">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna2f4">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna3f4">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna4f4">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna5f4">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna6f4">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna8f4">&nbsp;</td>
+                  <td bgcolor="#FFFFFF" id="columna9f4">&nbsp;</td>
+                </tr>
+                <tr bgcolor="#B1C5F3">
+                  <td id="columna7f5">&nbsp;</td>
+                  <td id="columna1f5">&nbsp;</td>
+                  <td id="columna2f5">&nbsp;</td>
+                  <td id="columna3f5">&nbsp;</td>
+                  <td id="columna4f5">&nbsp;</td>
+                  <td id="columna5f5">&nbsp;</td>
+                  <td id="columna6f5">&nbsp;</td>
+                  <td id="columna8f5">&nbsp;</td>
+                  <td id="columna9f5">&nbsp;</td>
+                </tr>
+              </table></td>
             </tr>
-            <br />
-            <td><input type="submit" name="sigpag" id="paginaanterior" value="Página Anterior" /></td>
-            <label id="labelpage"> -  1  - </label>
-            <td><input type="submit" name="sigpag" id="siguientepagina" value="Siguiente Página" /></td>
-            <br />
-            <br />
-            <td><input type="submit" name="test" id="rellenar" value="RELLENAR TABLA" /></td>
+            <s><br />
+            </s>
+            <td><s>
+              <input type="submit" name="sigpag" id="paginaanterior" value="Página Anterior" />
+            </s></td>
+            <s>
+              <label id="labelpage"> -  1  - </label>
+            </s>
+            <td><s>
+              <input type="submit" name="sigpag" id="siguientepagina" value="Siguiente Página" />
+            </s></td>
+            <s><br />
+              <br />
+            </s>
+            <td><s>
+              <input type="submit" name="test" id="rellenar" value="RELLENAR TABLA" />
+            </s></td>
           </div>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
         </div>
         <div class="TabbedPanelsContent">
           <p>
@@ -313,7 +333,7 @@
             <label for="search">Search:</label>
             <input type="search" name="search" id="search" />
           </p>
-          <table width="75%" border="3" cellspacing="0" cellpadding="0">
+          <table width="75%" border="4" cellspacing="0" cellpadding="0">
             <!-- TemplateBeginRepeat name="RepeatRegion1" -->
             <tr>
               <td>COD MATERIA</td>
@@ -322,9 +342,9 @@
             </tr>
             <!-- TemplateEndRepeat -->
             <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
+              <td style="color: #64C6EF">&nbsp;</td>
+              <td style="color: #64C6EF">&nbsp;</td>
+              <td style="color: #64C6EF">&nbsp;</td>
             </tr>
             <tr>
               <td>&nbsp;</td>
