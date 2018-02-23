@@ -356,8 +356,38 @@ rellenar.addEventListener("click", function () {
 
 })
 
-nuevoestudiante.addEventListener("click", function () {
+updateparticipante.addEventListener("click", function () {
+    const IDAdder = idestudiante.value;
 
+    //Código para agregar estudiante
+    var firebaseRef = firebase.database().ref();
+    firebaseRef.child("estudiantes").child(IDAdder).child("nombre").set(nombre.value);
+
+    var firebaseRef = firebase.database().ref();
+    firebaseRef.child("estudiantes").child(IDAdder).child("apellido").set(apellido.value);
+
+    var firebaseRef = firebase.database().ref();
+    firebaseRef.child("estudiantes").child(IDAdder).child("nombre-tutor").set(nombretutor.value);
+
+    var firebaseRef = firebase.database().ref();
+    firebaseRef.child("estudiantes").child(IDAdder).child("telefono").set(telefono.value);
+
+    var firebaseRef = firebase.database().ref();
+    firebaseRef.child("estudiantes").child(IDAdder).child("direccion").set(direccion.value);
+
+    var firebaseRef = firebase.database().ref();
+    firebaseRef.child("estudiantes").child(IDAdder).child("grado").set(grado.value);
+
+    var firebaseref = firebase.database().ref();
+    firebaseref.child("estudiantes").child(IDAdder).child("fecha_nac").set(fechanac.value);
+    NuevoEstudiante();
+})
+
+nuevoestudiante.addEventListener("click", function () {
+    NuevoEstudiante();    
+})
+
+function NuevoEstudiante() {
     //Nuevo Estudiante
     Actualizar = false;
 
@@ -385,12 +415,13 @@ nuevoestudiante.addEventListener("click", function () {
     var number3 = number1 - number2;
 
     edad.textContent = number3;
-    botonagregar.disabled = true;
-    updateparticipante.disabled = false;
+    botonagregar.disabled = false;
+    updateparticipante.disabled = true;
 
     nombre.focus();
     nombre.select();
-})
+}
+
 
 function ActualizarEstudiante() {
 
@@ -402,21 +433,8 @@ function ActualizarEstudiante() {
         return;
     } else {
 
-        //Revisar si el id existe
-        var existe = true;
-        try {
-            if ((estudiantes.length - 1) < idactualizar.value || idactualizar.value < 1) {
-                alert("Este ID no existe");
-                idactualizar.focus();
-                return;
-            } else {
-                //continue...
-            }
-        } catch (e) {
-            alert("Escriba un ID válido para actualizar");
-            idactualizar.focus();
-            return;
-        }
+
+
 
         Actualizar = true;
         botonagregar.disabled = true;
@@ -424,15 +442,29 @@ function ActualizarEstudiante() {
 
         idestudiante.value = idactualizar.value;
 
-        nombre.value = "";
-        apellido.value = "";
-        nombretutor.value = "";
-        telefono.value = "";
-        direccion.value = "";
-        date.value = "2000-01-01";
-        edad.value = "";
+        nombre.value = estudiantes[idactualizar.value][0];
+        apellido.value = estudiantes[idactualizar.value][1];;
+        nombretutor.value = estudiantes[idactualizar.value][2];;
+        telefono.value = estudiantes[idactualizar.value][3];;
+        direccion.value = estudiantes[idactualizar.value][4];;
+        grado.value = estudiantes[idactualizar.value][5];;
+        date.value = estudiantes[idactualizar.value][6];;
 
-        alert("Se va a Actualizar el estudiante: #" + idactualizar.value);
+        //Calcular edad
+        var test = "";
+        test = fechanac.value;
+        test = test.substring(0, 4);
+        var d = new Date();
+        var n = d.getFullYear();
+        var number1 = 1;
+        number1 = n;
+        var number2 = 2;
+        number2 = test;
+        var number3 = number1 - number2;
+
+        edad.value = number3;
+
+        nombre.focus();
     }
 
 }
