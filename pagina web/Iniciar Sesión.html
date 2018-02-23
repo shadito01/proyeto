@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Calification Control System</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- //Instanciando la base de datos-->
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCOxRKXX0g1E_1iryvDmiSwck6oIR26DXk",
+      authDomain: "sharedproyect.firebaseapp.com",
+      databaseURL: "https://sharedproyect.firebaseio.com",
+      projectId: "sharedproyect",
+      storageBucket: "sharedproyect.appspot.com",
+      messagingSenderId: "379754323405"
+    };
+    firebase.initializeApp(config);
+    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Califications Control System</title>
+    <style type="text/css">
+
+      <!--
+      #apDiv1 {
+        position: absolute;
+        left: 152px;
+        top: 46px;
+        width: 367px;
+        height: 150px;
+        z-index: 1;
+      }
+      -->
+    </style>
+    <script src="SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+    <link href="SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/AC_RunActiveContent.js" type="text/javascript"></script>
+    <style type="text/css">
+
+      <!--
+      body {
+        background-color: #000000;
+      }
+
+      .Estilo1 {
+        color: #000000
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: 300;
+      }
+      -->
+    </style>
+  </head>
+
+<body>
+  <div class="TabbedPanelsContentGroup">
+    <div class="TabbedPanelsContent">
+      <div align="center" class="alert-dismissable">
+        <div class="login-box-body">
+          <img src="logo-azul.png" width="256" height="256" align="middle"/>
+          <br />
+          <p class="login-box-msg"><strong>Inicio de Sesión</strong></p>
+          <form action="file:///C|/Users/JORDANY/Desktop/PAGINA WEB/views/register" method="post">
+            <label>
+              <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
+              Usuario
+            </label>
+            <br />
+            <input id="usuariotext" name="name" type="text" class="active" style="text-align:center;" />
+            <!-- Clip image with an oval -->
+            <!-- Clip image with a circle --><!-- Clip image with a thumbnail -->
+            <div class="form-group has-feedback">
+              <br />
+              <label>Contraseña</label>
+              <br />
+              <input type="password" id="passwordtext" class="active" name="password" style="text-align:center;"/>
+            </div>
+            <button type="button" id="Registrar" class="btn btn-primary btn-block ">Iniciar Sesión</button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+
+</body>
+</html>
