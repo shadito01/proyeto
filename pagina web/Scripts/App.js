@@ -181,21 +181,10 @@ botonagregar.addEventListener("click", function () {
         firebaseref.child("estudiantes").child(IDAdder).child("fecha_nac").set(fechanac.value);
 
         idestudiante.value = IDAdder;
+
         //Calcular edad
-        var test = "";
-        test = fechanac.value;
-        test = test.substring(0, 4);
-        var d = new Date();
-        var n = d.getFullYear();
+        edad.textContent = CalcularEdad(fechanac.value.substring(0, 4));
 
-        var number1 = 1;
-        number1 = n;
-        var number2 = 2;
-        number2 = test;
-
-        var number3 = number1 - number2;
-
-        edad.textContent = number3;
         NuevoEstudiante();
     } else {
         alert("Rellene todos los campos antes de Guardar");
