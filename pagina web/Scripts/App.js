@@ -218,7 +218,7 @@ botonagregar.addEventListener("click", function () {
     var number3 = number1 - number2;
 
     edad.textContent = number3;
-
+    NuevoEstudiante();
 })
 
 paginaanterior.addEventListener("click", function () {
