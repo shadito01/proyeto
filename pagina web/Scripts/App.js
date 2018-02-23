@@ -67,6 +67,7 @@ const columna9f5 = document.querySelector("#columna9f5");
 var pagina = 0; //Página por defecto...
 var NuevoId = 1;
 var Indexing = false;
+var fivepage = 0;
 
 const botonagregar = document.querySelector("#botonagregar");
 const paginaanterior = document.querySelector("#paginaanterior");
@@ -95,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     botonagregar.disabled = false;
     updateparticipante.disabled = true;
+    botoneliminar.disabled = true;
 
     //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
     if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
@@ -123,17 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 }, false);
 
-firebaseChanguinref.on('child_removed', (snapshot) => {
-
-    //Reindexar
-    Indexing = true;
-    for (var i = 0; i < (snapshot.numChildren() + 1); i++) {
-        var snapshot.child(i) 
-    }
-
-    Indexing = false;
-    //Asignar en base a la página
-    var fivepage = pagina * 5;
+firebaseChanguinref.on('value', (snapshot) => {
 
     //Conseguir último ID
     NuevoId = snapshot.numChildren() + 1;
@@ -151,90 +143,8 @@ firebaseChanguinref.on('child_removed', (snapshot) => {
         estudiantes[i][6] = snapshot.child(i).child("fecha_nac").val();
     }
 
-    //Vaciar Columnas
-    for (var i = 1; i < 6; i++) {
-        for (var k = 1; k < 10; k++) {
-            window['columna' + k + 'f' + i].textContent = "";
-        }
-    }
+    RellenarTabla();
 
-    var normalcounter = 1;
-    for (var i = 1; i < 6; i++) {
-        if ((estudiantes.length - 1) >= (i + fivepage)) {
-            for (var k = 0; k < 7; k++) {
-
-                window['columna' + (k + 1) + 'f' + normalcounter].textContent = estudiantes[i + fivepage][k];
-            }
-            if (window['columna1f' + normalcounter].textContent != "") {
-                window['columna7f' + normalcounter].textContent = (i + fivepage);
-            } else {
-            }
-        } else {
-        }
-        //para ir sumando las filas...
-        normalcounter++;
-    }
-
-    //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
-    if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
-        paginasiguiente.disabled = false;
-    } else {
-        paginasiguiente.disabled = true;
-    }
-})
-
-firebaseChanguinref.on('value', (snapshot) => {
-    if (!Indexing) {
-        //Asignar en base a la página
-        var fivepage = pagina * 5;
-
-        //Conseguir último ID
-        NuevoId = snapshot.numChildren() + 1;
-        console.log(NuevoId);
-        estudiantes = new Array(snapshot.numChildren());
-
-        for (var i = 1; i < NuevoId; i++) {
-            estudiantes[i] = new Array(7);
-            estudiantes[i][0] = snapshot.child(i).child("nombre").val();
-            estudiantes[i][1] = snapshot.child(i).child("apellido").val();
-            estudiantes[i][2] = snapshot.child(i).child("nombre-tutor").val();
-            estudiantes[i][3] = snapshot.child(i).child("telefono").val();
-            estudiantes[i][4] = snapshot.child(i).child("direccion").val();
-            estudiantes[i][5] = snapshot.child(i).child("grado").val();
-            estudiantes[i][6] = snapshot.child(i).child("fecha_nac").val();
-        }
-
-        //Vaciar Columnas
-        for (var i = 1; i < 6; i++) {
-            for (var k = 1; k < 10; k++) {
-                window['columna' + k + 'f' + i].textContent = "";
-            }
-        }
-
-        var normalcounter = 1;
-        for (var i = 1; i < 6; i++) {
-            if ((estudiantes.length - 1) >= (i + fivepage)) {
-                for (var k = 0; k < 7; k++) {
-
-                    window['columna' + (k + 1) + 'f' + normalcounter].textContent = estudiantes[i + fivepage][k];
-                }
-                if (window['columna1f' + normalcounter].textContent != "") {
-                    window['columna7f' + normalcounter].textContent = (i + fivepage);
-                } else {
-                }
-            } else {
-            }
-            //para ir sumando las filas...
-            normalcounter++;
-        }
-
-        //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
-        if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
-            paginasiguiente.disabled = false;
-        } else {
-            paginasiguiente.disabled = true;
-        }
-    }
 });
 
 botonagregar.addEventListener("click", function () {
@@ -303,32 +213,7 @@ paginaanterior.addEventListener("click", function () {
 
     labelpage.textContent = "-  " + (pagina + 1) + "  -";
 
-    //Asignar en base a la página
-    var fivepage = pagina * 5;
-
-    //Vaciar Columnas
-    for (var i = 1; i < 6; i++) {
-        for (var k = 1; k < 8; k++) {
-            window['columna' + k + 'f' + i].textContent = "";
-        }
-    }
-
-    var normalcounter = 1;
-    for (var i = 1; i < 6; i++) {
-        if ((estudiantes.length - 1) >= (i + fivepage)) {
-            for (var k = 0; k < 7; k++) {
-
-                window['columna' + (k + 1) + 'f' + normalcounter].textContent = estudiantes[i + fivepage][k];
-            }
-            if (window['columna1f' + normalcounter].textContent != "") {
-                window['columna7f' + normalcounter].textContent = (i + fivepage);
-            } else {
-            }
-        } else {
-        }
-        //para ir sumando las filas...
-        normalcounter++;
-    }
+    RellenarTabla();
 
     //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
     if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
@@ -351,32 +236,7 @@ paginasiguiente.addEventListener("click", function () {
 
     labelpage.textContent = "-  " + (pagina + 1) + "  -";
 
-    //Asignar en base a la página
-    var fivepage = pagina * 5;
-
-    //Vaciar Columnas
-    for (var i = 1; i < 6; i++) {
-        for (var k = 1; k < 8; k++) {
-            window['columna' + k + 'f' + i].textContent = "";
-        }
-    }
-
-    var normalcounter = 1;
-    for (var i = 1; i < 6; i++) {
-        if ((estudiantes.length - 1) >= (i + fivepage)) {
-            for (var k = 0; k < 7; k++) {
-
-                window['columna' + (k + 1) + 'f' + normalcounter].textContent = estudiantes[i + fivepage][k];
-            }
-            if (window['columna1f' + normalcounter].textContent != "") {
-                window['columna7f' + normalcounter].textContent = (i + fivepage);
-            } else {
-            }
-        } else {
-        }
-        //para ir sumando las filas...
-        normalcounter++;
-    }
+    RellenarTabla();
 
     //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
     if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
@@ -391,32 +251,7 @@ paginasiguiente.addEventListener("click", function () {
 rellenar.addEventListener("click", function () {
 
     ////Rellenar Tabla
-    //Asignar en base a la página
-    var fivepage = pagina * 5;
-
-    //Vaciar Columnas
-    for (var i = 1; i < 6; i++) {
-        for (var k = 1; k < 8; k++) {
-            window['columna' + k + 'f' + i].textContent = "";
-        }
-    }
-
-    var normalcounter = 1;
-    for (var i = 1; i < 6; i++) {
-        if ((estudiantes.length - 1) >= (i + fivepage)) {
-            for (var k = 0; k < 7; k++) {
-
-                window['columna' + (k + 1) + 'f' + normalcounter].textContent = estudiantes[i + fivepage][k];
-            }
-            if (window['columna1f' + normalcounter].textContent != "") {
-                window['columna7f' + normalcounter].textContent = (i + fivepage);
-            } else {
-            }
-        } else {
-        }
-        //para ir sumando las filas...
-        normalcounter++;
-    }
+    RellenarTabla();
 
     //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
     if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
@@ -530,10 +365,6 @@ function NuevoEstudiante() {
     nombre.select();
 }
 
-function ReIndexar() {
-
-}
-
 function ActualizarEstudiante() {
 
     //Actualizar
@@ -598,6 +429,46 @@ btnactualizar.addEventListener("click", function () {
     ActualizarEstudiante();
 })
 
+function RellenarTabla() {
+
+    //Asignar en base a la página
+    fivepage = pagina * 5;
+
+    //Vaciar Columnas
+    for (var i = 1; i < 6; i++) {
+        for (var k = 1; k < 10; k++) {
+            window['columna' + k + 'f' + i].textContent = "";
+        }
+    }
+
+    var normalcounter = 1;
+    for (var i = 1; i < 6; i++) {
+        if ((estudiantes.length - 1) >= (i + fivepage)) {
+            for (var k = 0; k < 7; k++) {
+
+                window['columna' + (k + 1) + 'f' + normalcounter].textContent = estudiantes[i + fivepage][k];
+            }
+            if (window['columna1f' + normalcounter].textContent != "") {
+                window['columna7f' + normalcounter].textContent = (i + fivepage);
+                window['columna8f' + normalcounter].textContent = estudiantes[i + fivepage][6];
+                window['columna9f' + normalcounter].textContent = CalcularEdad(estudiantes[i + fivepage][6].substring(0, 4))
+            } else {
+            }
+        } else {
+        }
+        //para ir sumando las filas...
+        normalcounter++;
+    }
+
+    //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
+    if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
+        paginasiguiente.disabled = false;
+    } else {
+        paginasiguiente.disabled = true;
+    }
+
+}
+
 function RevisarCamposRellenos() {
     if (nombre.value != "" && apellido.value != "" && nombretutor.value != "" && direccion.value != "" &&
         telefono.value != "" && edad.value != "") {
@@ -605,4 +476,17 @@ function RevisarCamposRellenos() {
     } else {
         return false;
     }
+}
+
+function CalcularEdad(FechaNac) {
+    var edad = 1;
+    var d = new Date();
+    var n = d.getFullYear();
+    var number1 = 1;
+    number1 = n;
+    var number2 = 2;
+    number2 = FechaNac;
+    var edad = number1 - FechaNac;
+
+    return edad;
 }
