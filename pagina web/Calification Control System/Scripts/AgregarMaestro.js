@@ -9,6 +9,11 @@ const codigomateria = document.querySelector("#codmateria");
 const nombremateria = document.querySelector("#nombremateria");
 const codigomaestro = document.querySelector("#codigomaestro");
 
+const usuario = document.querySelector("#usuariregistrar");
+const email = document.querySelector("#emailregistrar");
+const contraseña = document.querySelector("#passwordregistrar");
+const tipousuario = document.querySelector("#tipousuario");
+
 const codmateriacali = document.querySelector("#codigoestudiantcai");
 const nombremateriacali = document.querySelector("#codigomateriacali");
 const notacali = document.querySelector("#notacali");
@@ -75,12 +80,14 @@ var pagina2 = 0; //Página por defecto...
 var NuevoIdmaestro = 1;
 var NuevoIdMaeteria = 1;
 var NuevoIdCalificacion = 1;
+var NuevoIdlogin = 1;
 var Indexing2 = false;
 var fivepage2 = 0;
 
 const agregarmaestro = document.querySelector("#agregarmaestro");
 const agregarmateria = document.querySelector("#agregarmateria");
 const agregarevaluacion = document.querySelector("#botonagregarcali");
+const Registrar = document.querySelector("#Registrar");
 const paginaanterior2 = document.querySelector("#paginaanterior2");
 const paginasiguiente2 = document.querySelector("#siguientepagina2");
 const labelpage2 = document.querySelector("#labelpage2");
@@ -88,9 +95,11 @@ const labelpage2 = document.querySelector("#labelpage2");
 var ListenerMaterias = firebase.database().ref().child("materias");
 var ListenerMaestros = firebase.database().ref().child("maestros");
 var ListenerEvaluaciones = firebase.database().ref().child("evaluaciones");
+var ListenerLogin = firebase.database().ref().child("login");
 var maestros = new Array();
 var materias = new Array();
 var evaluaciones = new Array();
+var login = new Array();
 
 document.addEventListener('DOMContentLoaded', function () {
     if (pagina2 == 0) {
@@ -109,6 +118,22 @@ document.addEventListener('DOMContentLoaded', function () {
     labelpage2.textContent = "-  " + (pagina2 + 1) + "  -"; //cargar página
 
 }, false);
+
+
+ListenerLogin.on('value', (snapshot) => {
+
+    //Conseguir último ID
+    NuevoIdlogin = snapshot.numChildren() + 1;
+    console.log(NuevoIdlogin);
+    login = new Array(snapshot.numChildren());
+
+    for (var i = 1; i < NuevoIdlogin; i++) {
+        login[i] = new Array(3);
+        login[i][0] = snapshot.child(i).child("usuario").val;
+        login[i][1] = snapshot.child(i).child("contraseña").val();
+        login[i][2] = snapshot.child(i).child("email").val();
+    }
+});
 
 ListenerMaestros.on('value', (snapshot) => {
 
@@ -163,6 +188,31 @@ ListenerEvaluaciones.on('value', (snapshot) => {
     }
 
 });
+
+Registrar.addEventListener("click", function () {
+
+    var RevisarCampos = REvisarCamposLogin();
+
+    if (RevisarCampos) {
+
+        console.log("Guardando nuevo usuario...");
+
+        const IDAdder = NuevoIdlogin;
+
+        //Código para agregar estudiante
+        var firebaseRef = firebase.database().ref();
+
+        firebaseRef.child("login").child(IDAdder).child("usuario").set(usuario.value);
+        firebaseRef.child("login").child(IDAdder).child("contraseña").set(contraseña.value);
+        firebaseRef.child("login").child(IDAdder).child("email").set(email.value);
+
+        alert("Se agregó exitosamente el usuario: "+usuario.value);
+        NuevoLogin();
+
+    } else {
+        alert("Rellene todos los campos antes de Guardar");
+    }
+})
 
 agregarmaestro.addEventListener("click", function () {
 
@@ -262,6 +312,13 @@ function NuevaMateria(){
   nombremateria.focus();
 }
 
+function NuevoLogin(){
+  usuario.value = "";
+  email.value = "";
+  contraseña.value = "";
+  usuario.focus();
+}
+
 function RevisarCamposRellenosmaestro(){
 if(nombremaestro.value == "" || apellidomaestro.value == "" || telefonomaestro.value == "" || direccionmaestro.value == ""){
   return false;
@@ -286,3 +343,10 @@ if(nombremateria.value == "" || codigomaestro.value == ""){
   }
 }
 
+function REvisarCamposLogin(){
+if(usuario.value == "" || email .value == "" || contraseña .value == ""){
+  return false;
+}else{
+  return true;
+  }
+}

@@ -13,6 +13,24 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+
+      <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCOxRKXX0g1E_1iryvDmiSwck6oIR26DXk",
+      authDomain: "sharedproyect.firebaseapp.com",
+      databaseURL: "https://sharedproyect.firebaseio.com",
+      projectId: "sharedproyect",
+      storageBucket: "sharedproyect.appspot.com",
+      messagingSenderId: "379754323405"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+
 	</head>
 	<body class="landing">
 
@@ -60,7 +78,7 @@
               <input type="password" id="passwordtext" class="active" name="password" style="text-align:center;"/>
             </div>
               <br />
-            <button type="button" id="Registrar" class="btn btn-primary btn-block" onclick="location='profesor.html'">Iniciar Sesión</button>
+              <button type="button" id="Registrar" class="btn btn-primary btn-block" onclick="ValidarInicioDeSesion()">Iniciar Sesión</button>
           </form>
         </div>
 
@@ -79,6 +97,7 @@
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
+      <script src="Scripts/funciones.js"></script>
 
 	</body>
 </html>
