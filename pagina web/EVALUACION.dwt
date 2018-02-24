@@ -23,7 +23,6 @@
   <input type="text" name="textfield4" id="textfield4">
   <label for="textfield5">OBSERVACION:</label>
   <input type="text" name="textfield5" id="textfield5">
-  <input type="button" name="button" id="button" value="AGREGAR">
 </p>
 <table width="75%" border="3" cellspacing="0" cellpadding="0">
   <!-- TemplateBeginRepeat name="RepeatRegion1" -->
