@@ -58,7 +58,6 @@
     }
     -->
   </style>
-  <link href="less/mixins/table-row.less.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -84,6 +83,7 @@
         <li class="TabbedPanelsTab" tabindex="0">PARTICIPANTE</li>
         <li class="TabbedPanelsTab" tabindex="0">ASIGNATURA</li>
         <li class="TabbedPanelsTab" tabindex="0">EVALUACION</li>
+        <li class="TabbedPanelsTab" tabindex="0">Cerrar Sesion</li>
       </ul>
       <div class="TabbedPanelsContentGroup">
         <div class="TabbedPanelsContent">
@@ -215,10 +215,7 @@
                   <td bgcolor="#B1C5F3" id="columna8f1">&nbsp;</td>
                   <td bgcolor="#B1C5F3" id="columna9f1">&nbsp;</td>
                   <td><s>
-                    <input type="submit" name="button2" id="botoneliminar" value="ELIMINAR" />
-                  </s></td>
-                  <td width="71"><s>
-                    <input type="text" style="width: 35px; text-align:center; font-weight: bold; background-color:lightcoral;" id="ideliminar" />
+                    <input type="submit" name="nuevoestudiante" id="nuevoestudiante" value="NUEVO" />
                   </s></td>
                 </tr>
                 <tr>
@@ -232,7 +229,6 @@
                   <td bgcolor="#FFFFFF" id="columna8f2">&nbsp;</td>
                   <td bgcolor="#FFFFFF" id="columna9f2">&nbsp;</td>
                   <td><s>
-                    <input type="submit" name="nuevoestudiante" id="nuevoestudiante" value="NUEVO" />
                   </s></td>
                 </tr>
                 <tr bgcolor="#B1C5F3">
@@ -293,22 +289,25 @@
         </div>
         <div class="TabbedPanelsContent">
           <p>
+          <br />
+          <label for="textfield5">            <strong>Agregar Maestro</strong></label>
+          <br />
             <label for="textfield5">COD MAESTRO:</label>
-            <input type="text" name="textfield5" id="textfield5" />
+            <input type="text" name="textfield5" id="codmaestro" disabled/>
             <label for="textfield6">NOMBRE:</label>
-            <input type="text" name="textfield5" id="textfield6" />
+            <input type="text" name="textfield5" id="nombremaestro" />
             <label for="textfield7">APELLIDO:</label>
-            <input type="text" name="textfield5" id="textfield7" />
+            <input type="text" name="textfield5" id="apellidomaestro" />
           </p>
           <p>
             <label for="label">
               <br />
               Tel:
             </label>
-            <input type="tel" name="tel2" id="label" />
+            <input type="tel" name="tel2" id="telmaestro" />
             <label for="textfield8">Direccion:</label>
-            <input type="text" name="textfield8" id="textfield8" />
-            <input type="button" name="button" id="button" value="AGREGAR" />
+            <input type="text" name="textfield8" id="direccionmaestro" />
+            <input type="button" name="button" id="agregarmaestro" value="AGREGAR" />
           </p>
           <p></p>
           <p>&nbsp; </p>
@@ -317,12 +316,12 @@
           </form>
           <p>
             <label for="textfield">COD MATERIA:</label>
-            <input type="text" name="textfield4" id="textfield" />
+            <input type="text" name="textfield4" id="codmateria" disabled/>
             <label for="textfield2">MATERIA:</label>
-            <input type="text" name="textfield4" id="textfield2" />
+            <input type="text" name="textfield4" id="nombremateria" />
             <label for="textfield3">COD MAESTRO:</label>
-            <input type="text" name="textfield4" id="textfield3" />
-            <input type="button" name="button" id="button" value="AGREGAR" />
+            <input type="text" name="textfield4" id="codigomaestro" />
+            <input type="button" name="button" id="agregarmateria" value="AGREGAR" />
           </p>
           <p>
             <label for="search">Search:</label>
@@ -377,22 +376,32 @@
               <td>&nbsp;</td>
             </tr>
           </table>
+          <td><s>
+              <input type="submit" name="sigpag" id="paginaanterior2" value="Página Anterior" />
+            </s></td>
+            <s>
+              <label id="labelpage2"> -  1  - </label>
+            </s>
+            <td><s>
+              <input type="submit" name="sigpag" id="siguientepagina2" value="Siguiente Página" />
+            </s></td>
+
         </div>
         <div class="TabbedPanelsContent">
           <p>
             <label for="label2">COD PARTICIPANTE:</label>
-            <input type="text" name="textfield6" id="label2" />
+            <input type="text" name="textfield6" id="codigoestudiantcai" />
             <label for="label3">COD MATERIA:</label>
-            <input type="text" name="textfield6" id="label3" />
-            <label for="label4">NOTA:</label>
-            <input type="text" name="textfield6" id="label4" />
+            <input type="text" name="textfield6" id="codigomateriacali" />
+            <br />
+
           </p>
           <p>
-            <label for="textfield4">NOTA FINAL:</label>
-            <input type="text" name="textfield6" id="textfield4" />
+                      <label for="label4">NOTA:</label>
+            <input type="text" name="textfield6" id="notacali" /> 
             <label for="label5">OBSERVACION:</label>
-            <input type="text" name="textfield6" id="label5" />
-            <input type="button" name="button3" id="button3" value="AGREGAR" />
+            <input type="text" name="textfield6" id="observacioncali" />
+            <input type="button" name="button3" id="botonagregarcali" value="AGREGAR" />
           </p>
           <table width="75%" border="3" cellspacing="0" cellpadding="0">
             <!-- TemplateBeginRepeat name="RepeatRegion1" -->
@@ -503,6 +512,14 @@
               <td>&nbsp;</td>
             </tr>
           </table>
+
+        </div>
+
+        <div class="TabbedPanelsContent">
+          <p>
+           <button type="button" id="Registrar" class="btn btn-primary btn-block" onclick="location='index.html'">Cerrar Sesion</button>
+        </div>
+
         </div>
       </div>
     </div>
@@ -514,5 +531,6 @@
   </script>
   <!--Scripts de Conexión-->
   <script src="Scripts/app.js"></script>
+  <script src="Scripts/AgregarMaestro.js"></script>
 </body>
 </html>

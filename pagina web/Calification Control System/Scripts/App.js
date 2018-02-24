@@ -64,7 +64,7 @@ const columna7f5 = document.querySelector("#columna7f5");
 const columna8f5 = document.querySelector("#columna8f5");
 const columna9f5 = document.querySelector("#columna9f5");
 
-var pagina = 0; //Página por defecto...
+var pagina = 0; //PÃ¡gina por defecto...
 var NuevoId = 1;
 var Indexing = false;
 var fivepage = 0;
@@ -78,13 +78,11 @@ const nuevoestudiante = document.querySelector("#nuevoestudiante");
 const btnactualizar = document.querySelector("#btnactualizar");
 const idactualizar = document.querySelector("#idactualizar");
 const updateparticipante = document.querySelector("#btnactualizarselec");
-const botoneliminar = document.querySelector("#botoneliminar");
-const ideliminar = document.querySelector("#ideliminar");
 
-//Saber si se está creando o actualizando
+//Saber si se estÃ¡ creando o actualizando
 var Actualizar = false;
 
-var firebaseChanguinref = firebase.database().ref().child("estudiantes");
+var Listenerestudiantes = firebase.database().ref().child("estudiantes");
 var estudiantes = new Array();
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -96,16 +94,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     botonagregar.disabled = false;
     updateparticipante.disabled = true;
-    botoneliminar.disabled = true;
+    
 
-    //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
+    //Revisar que en la prÃ³xima pÃ¡gina halla datos para mostrar, de lo contrario desactivar el botÃ³n de "PÃ¡gina siguiente"...
     if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
         paginasiguiente.disabled = false;
     } else {
         paginasiguiente.disabled = true;
     }
 
-    labelpage.textContent = "-  " + (pagina + 1) + "  -"; //cargar página
+    labelpage.textContent = "-  " + (pagina + 1) + "  -"; //cargar pÃ¡gina
 
     //Calcular edad
     var test = "";
@@ -125,9 +123,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 }, false);
 
-firebaseChanguinref.on('value', (snapshot) => {
+Listenerestudiantes.on('value', (snapshot) => {
 
-    //Conseguir último ID
+
+    //Conseguir Ãºltimo ID
     NuevoId = snapshot.numChildren() + 1;
     console.log(NuevoId);
     estudiantes = new Array(snapshot.numChildren());
@@ -158,7 +157,7 @@ botonagregar.addEventListener("click", function () {
 
         const IDAdder = NuevoId;
 
-        //Código para agregar estudiante
+        //CÃ³digo para agregar estudiante
         var firebaseRef = firebase.database().ref();
         firebaseRef.child("estudiantes").child(IDAdder).child("nombre").set(nombre.value);
 
@@ -192,7 +191,7 @@ botonagregar.addEventListener("click", function () {
 })
 
 paginaanterior.addEventListener("click", function () {
-    //Reducir una página
+    //Reducir una pÃ¡gina
     pagina--;
     //Si la pagina es la 1, desabilitar el boton de pagina anterior
     if (pagina == 0) {
@@ -204,7 +203,7 @@ paginaanterior.addEventListener("click", function () {
 
     RellenarTabla();
 
-    //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
+    //Revisar que en la prÃ³xima pÃ¡gina halla datos para mostrar, de lo contrario desactivar el botÃ³n de "PÃ¡gina siguiente"...
     if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
         paginasiguiente.disabled = false;
     } else {
@@ -215,7 +214,7 @@ paginaanterior.addEventListener("click", function () {
 
 
 paginasiguiente.addEventListener("click", function () {
-    //Reducir una página
+    //Reducir una pÃ¡gina
     pagina++;
     //Si la pagina es la 1, desabilitar el boton de pagina anterior
     if (pagina > 0) {
@@ -227,7 +226,7 @@ paginasiguiente.addEventListener("click", function () {
 
     RellenarTabla();
 
-    //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
+    //Revisar que en la prÃ³xima pÃ¡gina halla datos para mostrar, de lo contrario desactivar el botÃ³n de "PÃ¡gina siguiente"...
     if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
         paginasiguiente.disabled = false;
     } else {
@@ -242,7 +241,7 @@ rellenar.addEventListener("click", function () {
     ////Rellenar Tabla
     RellenarTabla();
 
-    //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
+    //Revisar que en la prÃ³xima pÃ¡gina halla datos para mostrar, de lo contrario desactivar el botÃ³n de "PÃ¡gina siguiente"...
     if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
         paginasiguiente.disabled = false;
     } else {
@@ -259,7 +258,7 @@ updateparticipante.addEventListener("click", function () {
 
         const IDAdder = idestudiante.value;
 
-        //Código para agregar estudiante
+        //CÃ³digo para agregar estudiante
         var firebaseRef = firebase.database().ref();
         firebaseRef.child("estudiantes").child(IDAdder).child("nombre").set(nombre.value);
 
@@ -286,34 +285,6 @@ updateparticipante.addEventListener("click", function () {
     }
 })
 
-botoneliminar.addEventListener("click", function () {
-    //Eliminar
-    //Revisar que halla escrito un ID
-    if (ideliminar.value == "") {
-        alert("Escriba un ID para ELIMINAR");
-        ideliminar.focus();
-        return;
-    } else {
-        //Revisar si el id existe
-        try {
-            if ((estudiantes.length - 1) < ideliminar.value || ideliminar.value < 1) {
-                alert("Este ID no existe");
-                ideliminar.focus();
-                return;
-            } else {
-                //continue...
-            }
-        } catch (e) {
-            alert("Escriba un ID válido para ELIMINAR");
-            ideliminar.focus();
-            return;
-        }
-    }
-
-    var firebaseRef = firebase.database().ref();
-    firebaseRef.child("estudiantes").child(ideliminar.value).remove();
-
-})
 
 nuevoestudiante.addEventListener("click", function () {
     NuevoEstudiante();
@@ -373,7 +344,7 @@ function ActualizarEstudiante() {
                 //continue...
             }
         } catch (e) {
-            alert("Escriba un ID válido para actualizar");
+            alert("Escriba un ID vÃ¡lido para actualizar");
             idactualizar.focus();
             return;
         }
@@ -420,7 +391,8 @@ btnactualizar.addEventListener("click", function () {
 
 function RellenarTabla() {
 
-    //Asignar en base a la página
+    console.log("Aqui");
+    //Asignar en base a la pÃ¡gina
     fivepage = pagina * 5;
 
     //Vaciar Columnas
@@ -449,7 +421,7 @@ function RellenarTabla() {
         normalcounter++;
     }
 
-    //Revisar que en la próxima página halla datos para mostrar, de lo contrario desactivar el botón de "Página siguiente"...
+    //Revisar que en la prÃ³xima pÃ¡gina halla datos para mostrar, de lo contrario desactivar el botÃ³n de "PÃ¡gina siguiente"...
     if (((NuevoId - 1) - ((pagina + 1) * 5)) > 0) {
         paginasiguiente.disabled = false;
     } else {
