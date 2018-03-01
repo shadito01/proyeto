@@ -18,7 +18,7 @@ return;
 
 var inicarsesion = ValidarUsuario();
 if(inicarsesion){
-location='profesor.html';
+  location ='Menu-Administrador.html';
 }else{
   alert("Contraseña o Usuario Incorrectos");
 } 
